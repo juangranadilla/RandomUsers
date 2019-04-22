@@ -1,11 +1,79 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+        <item name="textAppearanceHeadline1">@style/Headline1</item>
+        <item name="textAppearanceHeadline2">@style/Headline2</item>
+        <item name="textAppearanceHeadline3">@style/Headline3</item>
+        <item name="textAppearanceHeadline4">@style/Headline4</item>
+        <item name="textAppearanceHeadline5">@style/Headline5</item>
+        <item name="textAppearanceHeadline6">@style/Headline6</item>
+        <item name="textAppearanceBody1">@style/Body1</item>
+        <item name="textAppearanceBody2">@style/Body2</item>
+        <item name="textAppearanceSubtitle1">@style/Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/Subtitle2</item>
+        <item name="textAppearanceButton">@style/Button</item>
+        <item name="textAppearanceCaption">@style/Caption</item>
+
+    </style>
+
+    <style name="Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/comfortaa_regular</item>
+    </style>
+
+    <style name="Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/comfortaa_regular</item>
+    </style>
+
+    <style name="Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/comfortaa_regular</item>
+    </style>
+
+    <style name="Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/comfortaa_regular</item>
+    </style>
+
+    <style name="Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/comfortaa_regular</item>
+    </style>
+
+    <style name="Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/comfortaa_regular</item>
+    </style>
+
+    <style name="Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/rubik_regular</item>
+    </style>
+
+    <style name="Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/rubik_regular</item>
+    </style>
+
+    <style name="Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/raleway_regular</item>
+    </style>
+
+    <style name="Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/raleway_regular</item>
+    </style>
+
+    <style name="Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/raleway_regular</item>
+    </style>
+
+    <style name="Caption" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">@font/raleway_regular</item>
+    </style>
+
+    <style name="Overline" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/rubik_regular</item>
     </style>
 
 </resources>
