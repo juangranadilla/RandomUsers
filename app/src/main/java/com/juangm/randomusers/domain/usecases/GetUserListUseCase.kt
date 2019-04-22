@@ -6,12 +6,12 @@ import com.juangm.randomusers.domain.models.UserModel
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GetUserListUseCase @Inject constructor(private val usersRepository: UsersRepository): SingleUseCase<List<UserModel>, Unit>() {
+class GetUserListUseCase @Inject constructor(private val usersRepository: UsersRepository): SingleUseCase<List<UserModel>, Int>() {
 
     private val defaultNumberOfUsers = 20
 
-    override fun buildUseCase(params: Unit): Single<List<UserModel>> {
-        return usersRepository.getUserList(defaultNumberOfUsers).map { users ->
+    override fun buildUseCase(page: Int): Single<List<UserModel>> {
+        return usersRepository.getUserList(page, defaultNumberOfUsers).map { users ->
             users.map { user -> UserModel(
                 user.id,
                 user.name,

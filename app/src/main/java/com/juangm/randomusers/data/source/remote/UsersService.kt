@@ -8,5 +8,5 @@ import retrofit2.http.Query
 interface UsersService {
 
     @GET(" ")
-    fun getRandomUsers(@Query("results") results: Int): Single<ResponseDto>
+    fun getRandomUsers(@Query("page") page: Int, @Query("results") results: Int): Single<ResponseDto>
 }

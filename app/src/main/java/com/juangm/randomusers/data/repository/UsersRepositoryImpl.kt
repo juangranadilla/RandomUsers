@@ -6,7 +6,7 @@ import io.reactivex.Single
 
 class UsersRepositoryImpl constructor(private val remoteSource: UsersRemoteSource): UsersRepository {
 
-    override fun getUserList(number: Int): Single<List<User>> {
-        return remoteSource.getRandomUsers(number)
+    override fun getUserList(page: Int, number: Int): Single<List<User>> {
+        return remoteSource.getRandomUsers(page, number)
     }
 }

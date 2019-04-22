@@ -5,5 +5,5 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 interface UsersRepository {
-    fun getUserList(number: Int): Single<List<User>>
+    fun getUserList(page: Int, number: Int): Single<List<User>>
 }

@@ -6,8 +6,8 @@ import javax.inject.Inject
 
 class UsersRemoteSourceImpl @Inject constructor(private val service: UsersService) : UsersRemoteSource {
 
-    override fun getRandomUsers(results: Int): Single<List<User>> {
-        return service.getRandomUsers(results).map { it.results.map {user ->
+    override fun getRandomUsers(page: Int, results: Int): Single<List<User>> {
+        return service.getRandomUsers(page, results).map { it.results.map {user ->
             User(
                 user.login.uuid,
                 user.name.first,
