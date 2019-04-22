@@ -1,4 +1,4 @@
-package com.example.randomusers
+package com.juangm.randomusers
 
 import org.junit.Test
 

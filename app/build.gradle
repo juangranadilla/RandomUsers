@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 28
@@ -30,18 +30,16 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     // Android x
-    implementation 'androidx.core:core-ktx:1.1.0-alpha05'
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha01'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+    implementation "androidx.recyclerview:recyclerview:$recycler_version"
+    implementation "androidx.cardview:cardview:$cardview_version"
+    implementation "com.google.android.material:material:$material_version"
 
-    // Architecture components
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$archLifecycle_version"
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
@@ -57,7 +55,12 @@ dependencies {
     // Dagger 2
     implementation "com.google.dagger:dagger:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
-    compileOnly "org.glassfish:javax.annotation:3.1.1"
+    compileOnly "org.glassfish:javax.annotation:$javax_annotation_version"
+
+    // Dagger 2 Android
+    kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
+    implementation "com.google.dagger:dagger-android:$dagger2_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger2_version"
 
     // OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
@@ -70,14 +73,18 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    //Gson
+    // Gson
     implementation "com.google.code.gson:gson:$gson_version"
 
-    //Glide
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    // Tests
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "com.google.truth:truth:$google_truth_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_core_testing_version"
+    androidTestImplementation "androidx.test:runner:$test_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 }
