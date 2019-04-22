@@ -1,7 +1,7 @@
 package com.juangm.randomusers.presentation.di.component
 
 import android.app.Application
-import com.juangm.randomusers.UsersApplication
+import com.juangm.randomusers.RandomUsersApplication
 import com.juangm.randomusers.presentation.di.module.*
 import dagger.BindsInstance
 import dagger.Component
@@ -26,5 +26,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(app: UsersApplication)
+    fun inject(app: RandomUsersApplication)
 }

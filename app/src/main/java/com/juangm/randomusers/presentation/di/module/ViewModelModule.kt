@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.juangm.randomusers.presentation.di.ViewModelFactory
 import com.juangm.randomusers.presentation.di.ViewModelKey
-import com.juangm.randomusers.presentation.ui.users.UserListViewModel
+import com.juangm.randomusers.presentation.ui.users.UsersViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -17,6 +17,6 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(UserListViewModel::class)
-    internal abstract fun userListViewModel(viewModel: UserListViewModel): ViewModel
+    @ViewModelKey(UsersViewModel::class)
+    internal abstract fun userListViewModel(viewModel: UsersViewModel): ViewModel
 }

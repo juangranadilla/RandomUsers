@@ -10,7 +10,7 @@ import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class UsersApplication: Application(), HasActivityInjector, HasSupportFragmentInjector {
+class RandomUsersApplication: Application(), HasActivityInjector, HasSupportFragmentInjector {
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>

@@ -1,4 +1,4 @@
-package com.juangm.randomusers.presentation.ui.models
+package com.juangm.randomusers.domain.models
 
 import java.io.Serializable
 
