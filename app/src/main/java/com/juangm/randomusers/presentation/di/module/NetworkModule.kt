@@ -1,7 +1,7 @@
 package com.juangm.randomusers.presentation.di.module
 
 import com.juangm.randomusers.BuildConfig
-import com.juangm.randomusers.data.source.remote.UsersService
+import com.juangm.randomusers.data.repository.UsersService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

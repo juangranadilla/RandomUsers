@@ -1,8 +1,6 @@
 package com.juangm.randomusers.domain.models
 
-import java.io.Serializable
-
-data class UserModel(
+data class User(
     val id: String,
     val name: String,
     val surname: String,
@@ -17,4 +15,4 @@ data class UserModel(
     val state: String,
     val registered: String,
     var favorite: Boolean = false
-): Serializable
+)

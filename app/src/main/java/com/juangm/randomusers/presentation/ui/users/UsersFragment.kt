@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.juangm.randomusers.R
-import com.juangm.randomusers.domain.models.UserModel
+import com.juangm.randomusers.domain.models.User
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_users.*
 import javax.inject.Inject
@@ -41,11 +41,9 @@ class UsersFragment : Fragment(), UserClickInterface {
 
         setRecyclerView()
         setViewModel()
-
-        usersViewModel.getUserList()
     }
 
-    override fun showUserDetail(user: UserModel) {
+    override fun showUserDetail(user: User) {
         //TODO navigate to user detail using Navigation
     }
 

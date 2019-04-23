@@ -1,23 +1,22 @@
 package com.juangm.randomusers.presentation.ui.users
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.juangm.randomusers.domain.models.UserModel
-import com.juangm.randomusers.domain.usecases.GetUserListUseCase
-import timber.log.Timber
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.juangm.randomusers.domain.datasource.UsersDataSourceFactory
+import com.juangm.randomusers.domain.models.User
 import javax.inject.Inject
 
-class UsersViewModel @Inject constructor(private val getUserListUseCase: GetUserListUseCase): ViewModel() {
+private const val PAGE_SIZE = 10
+private const val INITIAL_LOAD_SIZE_HINT = 20
 
-    private val _users = MutableLiveData<List<UserModel>>()
-    val users: LiveData<List<UserModel>>
-        get() = _users
+class UsersViewModel @Inject constructor(dataSourceFactory: UsersDataSourceFactory): ViewModel() {
 
-    fun getUserList() {
-        getUserListUseCase.execute(
-            { users -> _users.value = users },
-            { error -> Timber.e(error) },
-            1)
-    }
+    private val config = PagedList.Config.Builder()
+        .setEnablePlaceholders(false)
+        .setInitialLoadSizeHint(INITIAL_LOAD_SIZE_HINT)
+        .setPageSize(PAGE_SIZE)
+        .build()
+
+    val users = LivePagedListBuilder<Int, User>(dataSourceFactory, config).build()
 }

@@ -1,9 +1,10 @@
 package com.juangm.randomusers.data.repository
 
-import com.juangm.randomusers.data.model.User
-import io.reactivex.Completable
-import io.reactivex.Single
+import com.juangm.randomusers.domain.models.User
 
 interface UsersRepository {
-    fun getUserList(page: Int, number: Int): Single<List<User>>
+    fun getUserList(page: Int,
+                    number: Int,
+                    onSuccess: (users: List<User>) -> Unit,
+                    onError: (throwable: Throwable) -> Unit)
 }

@@ -1,14 +1,14 @@
 package com.juangm.randomusers.presentation.ui.users
 
 import androidx.recyclerview.widget.DiffUtil
-import com.juangm.randomusers.domain.models.UserModel
+import com.juangm.randomusers.domain.models.User
 
-class UserDiffCallback : DiffUtil.ItemCallback<UserModel>() {
-    override fun areItemsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
+class UserDiffCallback : DiffUtil.ItemCallback<User>() {
+    override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
+    override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
         return oldItem == newItem
     }
 }

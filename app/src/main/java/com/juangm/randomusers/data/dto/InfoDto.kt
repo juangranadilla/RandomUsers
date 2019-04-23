@@ -1,4 +1,4 @@
-package com.juangm.randomusers.data.source.dto
+package com.juangm.randomusers.data.dto
 
 data class InfoDto(
     val seed: String,
