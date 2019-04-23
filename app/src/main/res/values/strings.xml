@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">RandomUsers</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_users_title">Users list</string>
+    <string name="fragment_user_detail_title">User detail</string>
+
+    <string name="user_name">Name and surname</string>
+    <string name="user_email">Email</string>
+    <string name="user_gender">Gender</string>
+    <string name="user_address">Address</string>
+    <string name="user_registration_date">Registration date</string>
+
+    <string name="user_name_content">%1$s %2$s</string>
+    <string name="user_address_content">%1$s, %2$s, %3$s</string>
 </resources>

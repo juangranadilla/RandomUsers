@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.userdetail.UserDetailFragment">
+
+    <ImageView android:id="@+id/user_image"
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:padding="16dp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintHeight_percent="0.30"
+               android:background="@color/colorPrimary"
+               android:elevation="8dp"
+               tools:srcCompat="@tools:sample/avatars"/>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_image">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+            <TextView android:id="@+id/user_name_title"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Headline5"
+                      app:layout_constraintTop_toTopOf="parent"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      android:text="@string/user_name"/>
+
+            <TextView android:id="@+id/user_name"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Body1"
+                      app:layout_constraintTop_toBottomOf="@+id/user_name_title"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      tools:text="Name Surname"/>
+
+            <TextView android:id="@+id/user_email_title"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Headline5"
+                      app:layout_constraintTop_toBottomOf="@id/user_name"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      android:layout_marginTop="6dp"
+                      android:text="@string/user_email"/>
+
+            <TextView android:id="@+id/user_email"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Body1"
+                      android:autoLink="email"
+                      app:layout_constraintTop_toBottomOf="@id/user_email_title"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      tools:text="user@mail.com"/>
+
+            <TextView android:id="@+id/user_gender_title"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Headline5"
+                      app:layout_constraintTop_toBottomOf="@id/user_email"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      android:layout_marginTop="6dp"
+                      android:text="@string/user_gender"/>
+
+            <TextView android:id="@+id/user_gender"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Body1"
+                      app:layout_constraintTop_toBottomOf="@id/user_gender_title"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      tools:text="Male"/>
+
+            <TextView android:id="@+id/user_address_title"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Headline5"
+                      app:layout_constraintTop_toBottomOf="@id/user_gender"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      android:layout_marginTop="6dp"
+                      android:text="@string/user_address"/>
+
+            <TextView android:id="@+id/user_address"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Body1"
+                      app:layout_constraintTop_toBottomOf="@id/user_address_title"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      tools:text="Name Surname"/>
+
+            <TextView android:id="@+id/user_registered_title"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Headline5"
+                      app:layout_constraintTop_toBottomOf="@id/user_address"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      android:layout_marginTop="6dp"
+                      android:text="@string/user_registration_date"/>
+
+            <TextView android:id="@+id/user_registered"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@style/Body1"
+                      app:layout_constraintTop_toBottomOf="@id/user_registered_title"
+                      app:layout_constraintLeft_toLeftOf="parent"
+                      tools:text="17/09/2017"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

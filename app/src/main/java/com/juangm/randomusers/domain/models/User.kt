@@ -1,5 +1,7 @@
 package com.juangm.randomusers.domain.models
 
+import java.io.Serializable
+
 data class User(
     val id: String,
     val name: String,
@@ -15,4 +17,4 @@ data class User(
     val state: String,
     val registered: String,
     var favorite: Boolean = false
-)
+): Serializable
