@@ -1,7 +1,6 @@
 package com.juangm.randomusers.presentation.ui.users
 
 import android.content.Context
-import android.content.pm.ApplicationInfo.getCategoryTitle
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
@@ -48,9 +46,6 @@ class UsersFragment : Fragment(), UserClickInterface {
 
     override fun showUserDetail(user: User) {
         val direction = UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(user)
-
-        //TODO try to make a shared animation with Navigation
-
         findNavController().navigate(direction)
     }
 

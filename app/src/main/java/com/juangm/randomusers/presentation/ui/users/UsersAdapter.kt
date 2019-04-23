@@ -35,7 +35,7 @@ class UsersAdapter(private val userClickInterface: UserClickInterface) :
             itemView.user_image.circleImage(user?.largePicture, 2f, Color.GRAY)
 
             user?.let {
-                itemView.user_image.setOnClickListener {
+                itemView.setOnClickListener {
                     userClickInterface.showUserDetail(user)
                 }
             }
