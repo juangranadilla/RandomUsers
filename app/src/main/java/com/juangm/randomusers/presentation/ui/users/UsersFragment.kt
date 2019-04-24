@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
 import dagger.android.support.AndroidSupportInjection
@@ -51,7 +52,7 @@ class UsersFragment : Fragment(), UserClickInterface {
 
     private fun setRecyclerView() {
         adapter = UsersAdapter(this)
-        users_recycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        users_recycler.layoutManager = LinearLayoutManager(context)
         users_recycler.adapter = adapter
     }
 

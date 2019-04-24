@@ -30,7 +30,8 @@ class UsersAdapter(private val userClickInterface: UserClickInterface) :
         fun bind(user: User?, userClickInterface: UserClickInterface) {
             itemView.user_name.text = user?.name
             itemView.user_email.text = user?.email
-            itemView.user_address.text = user?.street + ", " + user?.city + ", " + user?.state
+            itemView.user_address.text = itemView.context
+                .getString(R.string.user_address_content, user?.street, user?.city, user?.state)
             itemView.user_phone.text = user?.phone
             itemView.user_image.circleImage(user?.largePicture, 2f, Color.GRAY)
 

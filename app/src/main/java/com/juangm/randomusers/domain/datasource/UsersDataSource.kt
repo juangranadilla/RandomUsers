@@ -29,6 +29,6 @@ class UsersDataSource @Inject constructor(private val repository: UsersRepositor
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
-        //TODO not sure about this method
+        //Not needed, as we load data in one direction, from our initial load
     }
 }
