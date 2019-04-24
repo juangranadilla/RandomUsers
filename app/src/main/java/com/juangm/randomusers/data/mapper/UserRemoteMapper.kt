@@ -2,9 +2,8 @@ package com.juangm.randomusers.data.mapper
 
 import com.juangm.randomusers.data.dto.UserDto
 import com.juangm.randomusers.domain.models.User
-import javax.inject.Inject
 
-class UserRemoteMapper @Inject constructor() {
+class UserRemoteMapper {
     fun fromApi(from: UserDto) = User(
         from.login.uuid,
         from.name.first,

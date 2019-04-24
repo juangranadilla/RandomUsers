@@ -5,12 +5,11 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.juangm.randomusers.domain.datasource.UsersDataSourceFactory
 import com.juangm.randomusers.domain.models.User
-import javax.inject.Inject
 
 private const val PAGE_SIZE = 10
 private const val INITIAL_LOAD_SIZE_HINT = 20
 
-class UsersViewModel @Inject constructor(dataSourceFactory: UsersDataSourceFactory): ViewModel() {
+class UsersViewModel(dataSourceFactory: UsersDataSourceFactory): ViewModel() {
 
     private val config = PagedList.Config.Builder()
         .setEnablePlaceholders(false)

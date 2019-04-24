@@ -1,29 +1,20 @@
 package com.juangm.randomusers
 
-import android.app.Activity
 import android.app.Application
-import androidx.fragment.app.Fragment
-import com.juangm.randomusers.presentation.di.component.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import dagger.android.support.HasSupportFragmentInjector
-import javax.inject.Inject
+import com.juangm.randomusers.presentation.di.dataModule
+import com.juangm.randomusers.presentation.di.domainModule
+import com.juangm.randomusers.presentation.di.networkModule
+import com.juangm.randomusers.presentation.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
-class RandomUsersApplication: Application(), HasActivityInjector, HasSupportFragmentInjector {
-
-    @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
-
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+class RandomUsersApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        DaggerAppComponent.builder().application(this).build().inject(this)
+        startKoin {
+            androidContext(this@RandomUsersApplication)
+            modules(listOf(dataModule, domainModule, networkModule, viewModelModule))
+        }
     }
-
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
 }

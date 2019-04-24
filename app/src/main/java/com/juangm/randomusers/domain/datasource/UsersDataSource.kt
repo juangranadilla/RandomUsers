@@ -4,9 +4,8 @@ import androidx.paging.PageKeyedDataSource
 import com.juangm.randomusers.data.repository.UsersRepository
 import com.juangm.randomusers.domain.models.User
 import timber.log.Timber
-import javax.inject.Inject
 
-class UsersDataSource @Inject constructor(private val repository: UsersRepository): PageKeyedDataSource<Int, User>() {
+class UsersDataSource(private val repository: UsersRepository): PageKeyedDataSource<Int, User>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, User>) {
         repository.getUserList(1, params.requestedLoadSize,
