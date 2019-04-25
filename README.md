@@ -10,4 +10,4 @@ Simple project to show the use of *Paging Library* and *Navigation Architecture 
 
 * * *
 
-<img src="screenshots/users_screen.png" width=250> <img src="screenshots/user_detail_screenshot.png" width=250>
+<img src="screenshots/users_screen.png" width=250> <img src="screenshots/user_detail_screen.png" width=250> <img src="screenshots/settings_deeplink_screen.png" width=250>
