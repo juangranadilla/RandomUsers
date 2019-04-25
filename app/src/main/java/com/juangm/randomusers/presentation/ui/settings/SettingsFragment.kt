@@ -1,4 +1,4 @@
-package com.juangm.randomusers.presentation.ui
+package com.juangm.randomusers.presentation.ui.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
