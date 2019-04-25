@@ -6,7 +6,7 @@ import com.juangm.randomusers.domain.models.User
 import retrofit2.Call
 import retrofit2.Response
 
-class UsersRepositoryImpl constructor(
+class UsersRepositoryImpl(
     private val usersService: UsersService,
     private val mapper: UserRemoteMapper
 ): UsersRepository {
