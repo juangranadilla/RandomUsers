@@ -1,6 +1,6 @@
 ## RandomUsers
 
-Simple project to show the use of *Paging Library* and *Navigation Architecture Components*, using the following:
+Simple project to show the use of **Android Paging Library** and **Navigation** Architecture Components, using the following:
 * Clean Architecture
 * Model-View-ViewModel in presentation layer
 * [RxJava](https://github.com/ReactiveX/RxJava) for concurrency when calling to domain layer use cases
