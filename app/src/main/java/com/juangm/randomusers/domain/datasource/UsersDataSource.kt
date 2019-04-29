@@ -7,7 +7,7 @@ import com.juangm.randomusers.domain.models.UserListParams
 import com.juangm.randomusers.domain.usecase.GetUserListUseCase
 import timber.log.Timber
 
-const val INITIAL_PAGE_NUMBER = 1
+private const val INITIAL_PAGE_NUMBER = 1
 
 class UsersDataSource(private val userListUseCase: GetUserListUseCase): PageKeyedDataSource<Int, User>() {
 

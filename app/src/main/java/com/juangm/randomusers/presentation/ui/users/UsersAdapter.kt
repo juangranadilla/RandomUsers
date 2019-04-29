@@ -22,23 +22,22 @@ class UsersAdapter(private val userClickInterface: UserClickInterface) :
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         Timber.d("Binding view holder at position $position")
-        holder.bind(getItem(position), userClickInterface)
+        val user = getItem(position)
+        user?.let { holder.bind(user, userClickInterface) }
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(user: User?, userClickInterface: UserClickInterface) {
-            itemView.user_name.text = user?.name
-            itemView.user_email.text = user?.email
+        fun bind(user: User, userClickInterface: UserClickInterface) {
+            itemView.user_name.text = user.name
+            itemView.user_email.text = user.email
             itemView.user_address.text = itemView.context
-                .getString(R.string.user_address_content, user?.street, user?.city, user?.state)
-            itemView.user_phone.text = user?.phone
-            itemView.user_image.circleImage(user?.largePicture, 2f, Color.GRAY)
+                .getString(R.string.user_address_content, user.street, user.city, user.state)
+            itemView.user_phone.text = user.phone
+            itemView.user_image.circleImage(user.largePicture, 2f, Color.GRAY)
 
-            user?.let {
-                itemView.setOnClickListener {
-                    userClickInterface.showUserDetail(user)
-                }
+            itemView.setOnClickListener {
+                userClickInterface.showUserDetail(user)
             }
         }
     }
