@@ -3,10 +3,11 @@
 Simple project to show the use of *Paging Library* and *Navigation Architecture Components*, using the following:
 * Clean Architecture
 * Model-View-ViewModel in presentation layer
-* Koin for dependency injection
-* Navigation (Architecture component)
-* Android Paging Library
-* Retrofit for networking, to retrieve data from [*https://randomuser.me/*](https://randomuser.me/)
+* [RxJava](https://github.com/ReactiveX/RxJava) for concurrency when calling to domain layer use cases
+* [Koin](https://github.com/InsertKoinIO/koin) for dependency injection
+* [Navigation](https://developer.android.com/guide/navigation) (Architecture component)
+* [Android Paging Library](https://developer.android.com/topic/libraries/architecture/paging/) for pagination
+* [Retrofit](https://square.github.io/retrofit/) for networking, to retrieve data from [Random user generator](https://randomuser.me/)
 
 * * *
 

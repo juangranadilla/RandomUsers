@@ -52,6 +52,10 @@ dependencies {
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-android-viewmodel:$koin_version"
 
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
     // OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
