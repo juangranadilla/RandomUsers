@@ -7,20 +7,22 @@ import com.juangm.randomusers.domain.models.UserListParams
 import com.juangm.randomusers.domain.usecase.GetUserListUseCase
 import timber.log.Timber
 
+const val INITIAL_PAGE_NUMBER = 1
+
 class UsersDataSource(private val userListUseCase: GetUserListUseCase): PageKeyedDataSource<Int, User>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, User>) {
         userListUseCase.execute(
-            { users -> callback.onResult(users, 1, 2) },
+            { users -> callback.onResult(users, INITIAL_PAGE_NUMBER, INITIAL_PAGE_NUMBER + 1) },
             { error -> Timber.e(error) },
-            UserListParams(1, params.requestedLoadSize))
+            UserListParams(INITIAL_PAGE_NUMBER, params.requestedLoadSize))
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
         userListUseCase.execute(
             { users -> callback.onResult(users, params.key + 1) },
             { error -> Timber.e(error) },
-            UserListParams(1, params.requestedLoadSize))
+            UserListParams(params.key, params.requestedLoadSize))
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, User>) {
