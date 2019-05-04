@@ -1,7 +1,6 @@
 package com.juangm.randomusers.presentation.di
 
 import com.juangm.randomusers.BuildConfig
-import com.juangm.randomusers.data.mapper.UserRemoteMapper
 import com.juangm.randomusers.data.repository.UsersRepository
 import com.juangm.randomusers.data.repository.UsersRepositoryImpl
 import com.juangm.randomusers.data.repository.UsersService
@@ -18,7 +17,7 @@ val dataModule = module {
     single { provideOkHttpClient() }
     single { provideRetrofit(get()) }
     single { provideUsersService(get()) }
-    single { UsersRepositoryImpl(get(), UserRemoteMapper()) as UsersRepository }
+    single { UsersRepositoryImpl(get()) as UsersRepository }
 }
 
 fun provideOkHttpClient() : OkHttpClient {
