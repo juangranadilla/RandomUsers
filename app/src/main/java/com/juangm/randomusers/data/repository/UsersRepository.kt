@@ -1,8 +1,9 @@
 package com.juangm.randomusers.data.repository
 
+import androidx.paging.PagedList
 import com.juangm.randomusers.domain.models.User
-import io.reactivex.Single
+import io.reactivex.Observable
 
 interface UsersRepository {
-    fun getUserList(page: Int, number: Int): Single<List<User>>
+    fun getUserList(): Observable<PagedList<User>>
 }

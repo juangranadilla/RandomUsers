@@ -30,10 +30,8 @@ class UsersFragment : Fragment(), UserClickInterface {
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerView()
-
-        usersViewModel.users.observe(this, Observer {
-                users -> adapter.submitList(users)
-        })
+        observeUsers()
+        usersViewModel.getUsers()
     }
 
     override fun showUserDetail(user: User) {
@@ -45,5 +43,11 @@ class UsersFragment : Fragment(), UserClickInterface {
         adapter = UsersAdapter(this)
         users_recycler.layoutManager = LinearLayoutManager(context)
         users_recycler.adapter = adapter
+    }
+
+    private fun observeUsers() {
+        usersViewModel.users.observe(this, Observer {
+                users -> adapter.submitList(users)
+        })
     }
 }

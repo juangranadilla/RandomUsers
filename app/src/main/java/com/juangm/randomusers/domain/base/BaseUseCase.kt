@@ -3,12 +3,35 @@ package com.juangm.randomusers.domain.base
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableCompletableObserver
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import timber.log.Timber
 
 abstract class BaseUseCase<T> : Disposable {
 
     protected var disposables = CompositeDisposable()
+
+    protected fun disposableObserver(
+        onComplete: () -> Unit,
+        onNext: (T) -> Unit,
+        onError: (Throwable) -> Unit = {}
+    ): DisposableObserver<T> {
+
+        return object : DisposableObserver<T>() {
+            override fun onComplete() {
+                onComplete.invoke()
+            }
+
+            override fun onNext(value: T) {
+                onNext.invoke(value)
+            }
+
+            override fun onError(e: Throwable) {
+                Timber.e( "onError... ${e.localizedMessage}")
+                onError.invoke(e)
+            }
+        }
+    }
 
     protected fun disposableSingleObserver(
         onNext: (T) -> Unit,

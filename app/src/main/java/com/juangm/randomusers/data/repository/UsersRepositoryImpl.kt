@@ -1,14 +1,26 @@
 package com.juangm.randomusers.data.repository
 
-import com.juangm.randomusers.data.mapper.mapRemoteUser
+import androidx.paging.PagedList
+import androidx.paging.RxPagedListBuilder
+import com.juangm.randomusers.data.constants.RepositoryConstants
+import com.juangm.randomusers.data.source.UsersBoundaryCallback
+import com.juangm.randomusers.data.source.local.UsersLocalSource
+import com.juangm.randomusers.data.source.remote.UsersRemoteSource
 import com.juangm.randomusers.domain.models.User
-import io.reactivex.Single
+import io.reactivex.Observable
+import timber.log.Timber
 
-class UsersRepositoryImpl(private val usersService: UsersService): UsersRepository {
+class UsersRepositoryImpl(
+    private val usersLocalSource: UsersLocalSource,
+    private val usersRemoteSource: UsersRemoteSource
+): UsersRepository {
 
-    override fun getUserList(page: Int, number: Int): Single<List<User>> {
-        return usersService.getRandomUsers(page, number).map { response ->
-            response.results.map { user -> mapRemoteUser(user) }
-        }
+    override fun getUserList(): Observable<PagedList<User>> {
+        return RxPagedListBuilder(usersLocalSource.getUsersFromDatabase(), RepositoryConstants.DEFAULT_PAGE_SIZE)
+            .setBoundaryCallback(UsersBoundaryCallback(usersLocalSource, usersRemoteSource))
+            .buildObservable()
+            .doOnNext { users ->
+                Timber.i("${users.size} users returned")
+            }
     }
 }
