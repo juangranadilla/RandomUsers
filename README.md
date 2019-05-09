@@ -8,6 +8,7 @@ Simple project to show the use of **Android Paging Library** and **Navigation** 
 * [Navigation](https://developer.android.com/guide/navigation) (Architecture component)
 * [Android Paging Library](https://developer.android.com/topic/libraries/architecture/paging/) for pagination
 * [Retrofit](https://square.github.io/retrofit/) for networking, to retrieve data from [Random user generator](https://randomuser.me/)
+* [Room](https://developer.android.com/topic/libraries/architecture/room) for database
 
 * * *
 
