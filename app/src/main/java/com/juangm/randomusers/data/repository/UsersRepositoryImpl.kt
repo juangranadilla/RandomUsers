@@ -15,12 +15,9 @@ class UsersRepositoryImpl(
     private val usersRemoteSource: UsersRemoteSource
 ): UsersRepository {
 
-    override fun getUserList(): Observable<PagedList<User>> {
-        return RxPagedListBuilder(usersLocalSource.getUsersFromDatabase(), RepositoryConstants.DEFAULT_PAGE_SIZE)
-            .setBoundaryCallback(UsersBoundaryCallback(usersLocalSource, usersRemoteSource))
-            .buildObservable()
-            .doOnNext { users ->
-                Timber.i("${users.size} users returned")
-            }
-    }
+    override fun getUserList(): Observable<PagedList<User>> = RxPagedListBuilder(
+        usersLocalSource.getUsersFromDatabase(), RepositoryConstants.DEFAULT_PAGE_SIZE)
+        .setBoundaryCallback(UsersBoundaryCallback(usersLocalSource, usersRemoteSource))
+        .buildObservable()
+        .doOnNext { users -> Timber.i("${users.size} users returned") }
 }

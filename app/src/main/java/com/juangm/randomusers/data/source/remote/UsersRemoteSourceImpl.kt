@@ -7,9 +7,8 @@ import io.reactivex.Single
 
 class UsersRemoteSourceImpl(private val usersService: UsersService): UsersRemoteSource {
 
-    override fun getUsersFromApi(page: Int): Single<List<User>> {
-        return usersService.getUsers(page).map { ApiResponse ->
-            ApiResponse.results.map { user -> mapRemoteUserToDomain(user) }
+    override fun getUsersFromApi(page: Int): Single<List<User>> = usersService.getUsers(page)
+        .map { ApiResponse ->
+            ApiResponse.results.map(mapRemoteUserToDomain)
         }
-    }
 }

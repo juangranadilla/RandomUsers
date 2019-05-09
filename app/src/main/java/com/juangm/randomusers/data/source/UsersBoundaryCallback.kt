@@ -1,6 +1,7 @@
 package com.juangm.randomusers.data.source
 
 import androidx.paging.PagedList
+import com.juangm.randomusers.data.constants.RepositoryConstants.DEFAULT_PAGE_SIZE
 import com.juangm.randomusers.data.mapper.mapDomainUserToLocal
 import com.juangm.randomusers.data.source.local.UsersLocalSource
 import com.juangm.randomusers.data.source.remote.UsersRemoteSource
@@ -13,7 +14,7 @@ class UsersBoundaryCallback(
     private val usersRemoteSource: UsersRemoteSource
 ): PagedList.BoundaryCallback<User>() {
 
-    private var page = 1
+    private var nextPage = 1
     private var isRequestRunning = false
 
     override fun onZeroItemsLoaded() {
@@ -30,15 +31,18 @@ class UsersBoundaryCallback(
         if(isRequestRunning) return
 
         isRequestRunning = true
-        //TODO Control next page number with items count from database
-        val disposable = usersRemoteSource.getUsersFromApi(page)
-            .map { users -> users.map { user -> mapDomainUserToLocal(user) } }
-            .doOnSuccess { users ->
-                if(users.isNotEmpty()) {
-                    usersLocalSource.saveUsersInDatabase(users)
-                    Timber.i("Users saved in database")
-                }
-                page++
+        val disposable = usersLocalSource.getUsersCountFromDatabase()
+            .flatMap { usersCount ->
+                if(usersCount != 0)
+                    nextPage = (usersCount / DEFAULT_PAGE_SIZE) + 1
+                usersRemoteSource.getUsersFromApi(nextPage)
+                    .map { users -> users.map(mapDomainUserToLocal) }
+                    .doOnSuccess { users ->
+                        if(users.isNotEmpty()) {
+                            usersLocalSource.saveUsersInDatabase(users)
+                            Timber.i("Users saved in database")
+                        }
+                    }
             }
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
