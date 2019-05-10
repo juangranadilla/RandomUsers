@@ -1,7 +1,7 @@
 ## RandomUsers
 
 RandomUsers is a sample Android application with the main goal of show my clean architecture approach, using several Architecture Components from [Android Jetpack](https://developer.android.com/jetpack), to do the following:
-* Get a paginated list of random users from a paged API, save them in a local database, and show the list on screen
+* Get a paged list of random users from a paged API, save them in a local database, and show the list on screen
 * Load more users on scroll
 * See the user details on click
 * *TODO: mark one or more users as favorites*
