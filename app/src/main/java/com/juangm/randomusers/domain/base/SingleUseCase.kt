@@ -6,10 +6,10 @@ import io.reactivex.schedulers.Schedulers
 
 abstract class SingleUseCase<T, Params> : BaseUseCase<T>() {
 
-    abstract fun buildUseCase(params: Params): Single<T>
+    abstract fun useCaseExecution(params: Params): Single<T>
 
     fun execute(onNext: (T) -> Unit, onError: (Throwable) -> Unit = {}, params: Params) {
-        val single = buildUseCase(params)
+        val single = useCaseExecution(params)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
         val disposable = single

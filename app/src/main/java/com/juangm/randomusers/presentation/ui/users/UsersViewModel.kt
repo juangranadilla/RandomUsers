@@ -15,7 +15,6 @@ class UsersViewModel(private val getUserListUseCase: GetUserListUseCase): ViewMo
         get() = _users
 
     fun getUsers() = getUserListUseCase.execute(
-        { Timber.i("GetUserLitsUseCase completed!") },
         { users -> _users.value = users },
         { throwable ->  Timber.e(throwable) },
         Unit

@@ -12,17 +12,17 @@ abstract class BaseUseCase<T> : Disposable {
     protected var disposables = CompositeDisposable()
 
     protected fun disposableObserver(
-        onComplete: () -> Unit,
         onNext: (T) -> Unit,
         onError: (Throwable) -> Unit = {}
     ): DisposableObserver<T> {
 
         return object : DisposableObserver<T>() {
             override fun onComplete() {
-                onComplete.invoke()
+                Timber.i("onComplete...")
             }
 
             override fun onNext(value: T) {
+                Timber.i("onNext...")
                 onNext.invoke(value)
             }
 
@@ -40,6 +40,7 @@ abstract class BaseUseCase<T> : Disposable {
 
         return object : DisposableSingleObserver<T>() {
             override fun onSuccess(value: T) {
+                Timber.i("onNext...")
                 onNext.invoke(value)
             }
 
@@ -58,6 +59,7 @@ abstract class BaseUseCase<T> : Disposable {
         return object : DisposableCompletableObserver() {
 
             override fun onComplete() {
+                Timber.i("onComplete...")
                 onComplete.invoke()
             }
 

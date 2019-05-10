@@ -8,5 +8,5 @@ import io.reactivex.Observable
 
 class GetUserListUseCase(private val usersRepository: UsersRepository): ObservableUseCase<PagedList<User>, Unit>() {
 
-    override fun buildUseCase(params: Unit): Observable<PagedList<User>> = usersRepository.getUserList()
+    override fun useCaseExecution(params: Unit): Observable<PagedList<User>> = usersRepository.getUserList()
 }

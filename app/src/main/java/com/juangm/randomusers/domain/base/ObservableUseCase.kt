@@ -6,14 +6,14 @@ import io.reactivex.schedulers.Schedulers
 
 abstract class ObservableUseCase<T, Params> : BaseUseCase<T>() {
 
-    abstract fun buildUseCase(params: Params): Observable<T>
+    abstract fun useCaseExecution(params: Params): Observable<T>
 
-    fun execute(onComplete: () -> Unit, onNext: (T) -> Unit, onError: (Throwable) -> Unit = {}, params: Params) {
-        val single = buildUseCase(params)
+    fun execute(onNext: (T) -> Unit, onError: (Throwable) -> Unit = {}, params: Params) {
+        val single = useCaseExecution(params)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
         val disposable = single
-            .subscribeWith(disposableObserver(onComplete, onNext, onError))
+            .subscribeWith(disposableObserver(onNext, onError))
         disposables.add(disposable)
     }
 }
