@@ -1,6 +1,5 @@
 package com.juangm.randomusers.presentation.ui.users
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
-import com.juangm.randomusers.presentation.ui.extensions.circleImage
+import com.juangm.randomusers.presentation.ui.utils.setUserImage
 import kotlinx.android.synthetic.main.item_user.view.*
 import timber.log.Timber
 
@@ -34,7 +33,7 @@ class UsersAdapter(private val userClickInterface: UserClickInterface) :
             itemView.user_address.text = itemView.context
                 .getString(R.string.user_address_content, user.street, user.city, user.state)
             itemView.user_phone.text = user.phone
-            itemView.user_image.circleImage(user.largePicture, 2f, Color.GRAY)
+            setUserImage(itemView.user_image, user.gender, user.largePicture)
 
             itemView.setOnClickListener {
                 userClickInterface.showUserDetail(user)

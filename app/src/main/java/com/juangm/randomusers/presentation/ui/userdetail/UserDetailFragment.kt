@@ -10,7 +10,9 @@ import androidx.navigation.fragment.navArgs
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
 import com.juangm.randomusers.presentation.ui.extensions.circleImage
+import com.juangm.randomusers.presentation.ui.utils.setUserImage
 import kotlinx.android.synthetic.main.fragment_user_detail.*
+import kotlinx.android.synthetic.main.item_user.view.*
 
 class UserDetailFragment : Fragment() {
 
@@ -37,6 +39,6 @@ class UserDetailFragment : Fragment() {
         user_gender.text = user.gender
         user_address.text = getString(R.string.user_address_content, user.street, user.city, user.state)
         user_registered.text = user.registered
-        user_image.circleImage(user.largePicture, 4f, Color.WHITE)
+        setUserImage(user_image, user.gender, user.largePicture)
     }
 }
