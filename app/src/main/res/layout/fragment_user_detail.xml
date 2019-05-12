@@ -15,7 +15,7 @@
                app:layout_constraintHeight_percent="0.30"
                android:background="@color/colorPrimary"
                android:elevation="8dp"
-               tools:srcCompat="@tools:sample/avatars"/>
+               tools:srcCompat="@drawable/ic_default_user_image_female"/>
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

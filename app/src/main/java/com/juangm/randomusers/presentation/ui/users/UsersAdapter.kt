@@ -36,6 +36,7 @@ class UsersAdapter(private val userClickInterface: UserClickInterface) :
             setUserImage(itemView.user_image, user.gender, user.largePicture)
 
             itemView.setOnClickListener {
+                Timber.i("User ${user.id} clicked")
                 userClickInterface.showUserDetail(user)
             }
         }

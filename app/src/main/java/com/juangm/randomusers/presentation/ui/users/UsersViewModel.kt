@@ -14,14 +14,17 @@ class UsersViewModel(private val getUserListUseCase: GetUserListUseCase): ViewMo
     val users: LiveData<PagedList<User>>
         get() = _users
 
-    fun getUsers() = getUserListUseCase.execute(
-        { users -> _users.value = users },
-        { throwable ->  Timber.e(throwable) },
-        Unit
-    )
+    fun getUsers() {
+        Timber.i("Executing GetUserListUseCase...")
+        getUserListUseCase.execute(
+            { users -> _users.value = users },
+            { throwable ->  Timber.e(throwable) },
+            Unit)
+    }
 
     override fun onCleared() {
         super.onCleared()
+        Timber.i("GetUserListUseCase disposed")
         getUserListUseCase.dispose()
     }
 }

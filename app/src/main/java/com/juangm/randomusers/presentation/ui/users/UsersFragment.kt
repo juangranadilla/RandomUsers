@@ -12,6 +12,7 @@ import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
 import kotlinx.android.synthetic.main.fragment_users.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class UsersFragment : Fragment(), UserClickInterface {
 
@@ -35,6 +36,7 @@ class UsersFragment : Fragment(), UserClickInterface {
     }
 
     override fun showUserDetail(user: User) {
+        Timber.i("Showing detail for user ${user.id}")
         val direction = UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(user)
         findNavController().navigate(direction)
     }
@@ -46,8 +48,9 @@ class UsersFragment : Fragment(), UserClickInterface {
     }
 
     private fun observeUsers() {
-        usersViewModel.users.observe(this, Observer {
-                users -> adapter.submitList(users)
+        usersViewModel.users.observe(this, Observer { users ->
+            Timber.i("Users value has changed. Submitting changes to adapter")
+            adapter.submitList(users)
         })
     }
 }
