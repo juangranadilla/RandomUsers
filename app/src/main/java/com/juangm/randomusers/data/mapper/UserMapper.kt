@@ -35,7 +35,8 @@ val mapLocalUserToDomain: (UserEntity) -> User = { user ->
         user.street,
         user.city,
         user.state,
-        user.registered)
+        user.registered,
+        user.favorite)
 }
 
 val mapDomainUserToLocal: (User) -> UserEntity = { user ->
@@ -52,5 +53,6 @@ val mapDomainUserToLocal: (User) -> UserEntity = { user ->
         user.street,
         user.city,
         user.state,
-        user.registered)
+        user.registered,
+        user.favorite)
 }

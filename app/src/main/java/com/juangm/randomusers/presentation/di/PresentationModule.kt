@@ -5,5 +5,5 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
-    viewModel { UsersViewModel(get()) }
+    viewModel { UsersViewModel(get(), get()) }
 }

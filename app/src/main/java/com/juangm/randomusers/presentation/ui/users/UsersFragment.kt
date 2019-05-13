@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_users.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class UsersFragment : Fragment(), UserClickInterface {
+class UsersFragment : Fragment(), UserItemInteractions {
 
     private val usersViewModel by viewModel<UsersViewModel>()
     private lateinit var adapter: UsersAdapter
@@ -35,12 +35,6 @@ class UsersFragment : Fragment(), UserClickInterface {
         usersViewModel.getUsers()
     }
 
-    override fun showUserDetail(user: User) {
-        Timber.i("Showing detail for user ${user.id}")
-        val direction = UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(user)
-        findNavController().navigate(direction)
-    }
-
     private fun setRecyclerView() {
         adapter = UsersAdapter(this)
         users_recycler.layoutManager = LinearLayoutManager(context)
@@ -52,5 +46,25 @@ class UsersFragment : Fragment(), UserClickInterface {
             Timber.i("Users value has changed. Submitting changes to adapter")
             adapter.submitList(users)
         })
+    }
+
+    override fun showUserDetail(user: User) {
+        Timber.i("Showing detail for user ${user.id}")
+        val direction = UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(user)
+        findNavController().navigate(direction)
+    }
+
+    override fun addUserToFavorites(user: User, position: Int) {
+        Timber.i("Adding user ${user.id} to favorites")
+        user.favorite = true
+        adapter.notifyItemChanged(position)
+        usersViewModel.updateUser(user)
+    }
+
+    override fun removeUserFromFavorites(user: User, position: Int) {
+        Timber.i("Removing user ${user.id} from favorites")
+        user.favorite = false
+        adapter.notifyItemChanged(position)
+        usersViewModel.updateUser(user)
     }
 }

@@ -1,11 +1,9 @@
 package com.juangm.randomusers.data.source.local.room
 
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.juangm.randomusers.data.source.local.room.entity.UserEntity
+import io.reactivex.Completable
 import io.reactivex.Single
 
 @Dao
@@ -19,4 +17,7 @@ interface UsersDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUsers(users: List<UserEntity>)
+
+    @Update
+    fun update(user: UserEntity): Completable
 }

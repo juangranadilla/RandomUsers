@@ -3,10 +3,12 @@ package com.juangm.randomusers.data.repository
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.juangm.randomusers.data.constants.RepositoryConstants
+import com.juangm.randomusers.data.mapper.mapDomainUserToLocal
 import com.juangm.randomusers.data.source.UsersBoundaryCallback
 import com.juangm.randomusers.data.source.local.UsersLocalSource
 import com.juangm.randomusers.data.source.remote.UsersRemoteSource
 import com.juangm.randomusers.domain.models.User
+import io.reactivex.Completable
 import io.reactivex.Observable
 import timber.log.Timber
 
@@ -20,4 +22,6 @@ class UsersRepositoryImpl(
             .setBoundaryCallback(UsersBoundaryCallback(usersLocalSource, usersRemoteSource))
             .buildObservable()
             .doOnNext { users -> Timber.i("${users.size} users returned") }
+
+    override fun updateUser(user: User): Completable = usersLocalSource.updateUser(mapDomainUserToLocal(user))
 }

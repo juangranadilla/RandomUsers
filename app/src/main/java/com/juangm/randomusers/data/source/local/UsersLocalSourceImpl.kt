@@ -5,6 +5,7 @@ import com.juangm.randomusers.data.mapper.mapLocalUserToDomain
 import com.juangm.randomusers.data.source.local.room.UsersDatabase
 import com.juangm.randomusers.data.source.local.room.entity.UserEntity
 import com.juangm.randomusers.domain.models.User
+import io.reactivex.Completable
 import io.reactivex.Single
 
 class UsersLocalSourceImpl(private val usersDatabase: UsersDatabase): UsersLocalSource {
@@ -15,4 +16,6 @@ class UsersLocalSourceImpl(private val usersDatabase: UsersDatabase): UsersLocal
         .mapByPage { users -> users.map(mapLocalUserToDomain) }
 
     override fun saveUsersInDatabase(users: List<UserEntity>) = usersDatabase.usersDao().insertUsers(users)
+
+    override fun updateUser(user: UserEntity): Completable = usersDatabase.usersDao().update(user)
 }

@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.juangm.randomusers.domain.models.User
 import com.juangm.randomusers.domain.usecase.GetUserListUseCase
+import com.juangm.randomusers.domain.usecase.UpdateUserUseCase
 import timber.log.Timber
 
-class UsersViewModel(private val getUserListUseCase: GetUserListUseCase): ViewModel() {
+class UsersViewModel(
+    private val getUserListUseCase: GetUserListUseCase,
+    private val updateUserUseCase: UpdateUserUseCase
+): ViewModel() {
 
     private val _users: MutableLiveData<PagedList<User>> = MutableLiveData()
     val users: LiveData<PagedList<User>>
@@ -22,9 +26,18 @@ class UsersViewModel(private val getUserListUseCase: GetUserListUseCase): ViewMo
             Unit)
     }
 
+    fun updateUser(user: User) {
+        Timber.i("Executing UpdateUserUseCase...")
+        updateUserUseCase.execute(
+            { Timber.i("UpdateUserUseCase completed") },
+            { throwable ->  Timber.e(throwable) },
+            user)
+    }
+
     override fun onCleared() {
         super.onCleared()
-        Timber.i("GetUserListUseCase disposed")
+        Timber.i("Use cases disposed")
         getUserListUseCase.dispose()
+        updateUserUseCase.dispose()
     }
 }
