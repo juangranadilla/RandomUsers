@@ -9,6 +9,7 @@ import io.reactivex.Single
 interface UsersLocalSource {
     fun getUsersCountFromDatabase(): Single<Int>
     fun getUsersFromDatabase(): DataSource.Factory<Int, User>
+    fun getFavoriteUsersFromDatabase(): Single<List<User>>
     fun saveUsersInDatabase(users: List<UserEntity>)
     fun updateUser(user: UserEntity): Completable
 }

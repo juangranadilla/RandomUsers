@@ -15,6 +15,9 @@ class UsersLocalSourceImpl(private val usersDatabase: UsersDatabase): UsersLocal
     override fun getUsersFromDatabase(): DataSource.Factory<Int, User> = usersDatabase.usersDao().getUsers()
         .mapByPage { users -> users.map(mapLocalUserToDomain) }
 
+    override fun getFavoriteUsersFromDatabase(): Single<List<User>> = usersDatabase.usersDao().getFavoriteUsers()
+        .map { users -> users.map(mapLocalUserToDomain) }
+
     override fun saveUsersInDatabase(users: List<UserEntity>) = usersDatabase.usersDao().insertUsers(users)
 
     override fun updateUser(user: UserEntity): Completable = usersDatabase.usersDao().update(user)
