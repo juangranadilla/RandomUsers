@@ -69,14 +69,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView android:id="@+id/user_favorite"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:padding="16dp"
-                   app:srcCompat="@drawable/ic_favorite_unselected"
-                   app:layout_constraintTop_toTopOf="parent"
-                   app:layout_constraintRight_toRightOf="parent"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
+import kotlinx.android.synthetic.main.activity_users.*
 import kotlinx.android.synthetic.main.fragment_users.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -30,9 +32,26 @@ class UsersFragment : Fragment(), UserItemInteractions {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setBottomAppBar()
         setRecyclerView()
         observeUsers()
-        usersViewModel.getUsers()
+    }
+
+    private fun setBottomAppBar() {
+        activity?.favorite_users_button?.let { bottomAppBarButton ->
+            bottomAppBarButton.setImageResource(R.drawable.ic_favorite_appbar)
+            if(bottomAppBarButton.isOrWillBeHidden)
+                bottomAppBarButton.show()
+
+            bottomAppBarButton.setOnClickListener {
+                //TODO navigate to favorite users fragment
+                Timber.i("Navigate to favorite users fragment")
+            }
+        }
+
+        activity?.bottom_app_bar?.let { bottomAppBar ->
+            bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+        }
     }
 
     private fun setRecyclerView() {
@@ -43,7 +62,7 @@ class UsersFragment : Fragment(), UserItemInteractions {
 
     private fun observeUsers() {
         usersViewModel.users.observe(this, Observer { users ->
-            Timber.i("Users value has changed. Submitting changes to adapter")
+            Timber.i("Users value has changed. Submitting changes to adapter. Users: ${users.size}")
             adapter.submitList(users)
         })
     }
@@ -52,19 +71,5 @@ class UsersFragment : Fragment(), UserItemInteractions {
         Timber.i("Showing detail for user ${user.id}")
         val direction = UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(user)
         findNavController().navigate(direction)
-    }
-
-    override fun addUserToFavorites(user: User, position: Int) {
-        Timber.i("Adding user ${user.id} to favorites")
-        user.favorite = true
-        adapter.notifyItemChanged(position)
-        usersViewModel.updateUser(user)
-    }
-
-    override fun removeUserFromFavorites(user: User, position: Int) {
-        Timber.i("Removing user ${user.id} from favorites")
-        user.favorite = false
-        adapter.notifyItemChanged(position)
-        usersViewModel.updateUser(user)
     }
 }

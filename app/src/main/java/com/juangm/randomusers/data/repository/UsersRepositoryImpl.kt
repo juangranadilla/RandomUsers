@@ -10,7 +10,6 @@ import com.juangm.randomusers.data.source.remote.UsersRemoteSource
 import com.juangm.randomusers.domain.models.User
 import io.reactivex.Completable
 import io.reactivex.Observable
-import timber.log.Timber
 
 class UsersRepositoryImpl(
     private val usersLocalSource: UsersLocalSource,
@@ -21,7 +20,6 @@ class UsersRepositoryImpl(
         RxPagedListBuilder(usersLocalSource.getUsersFromDatabase(), RepositoryConstants.DEFAULT_PAGE_SIZE)
             .setBoundaryCallback(UsersBoundaryCallback(usersLocalSource, usersRemoteSource))
             .buildObservable()
-            .doOnNext { users -> Timber.i("${users.size} users returned") }
 
     override fun updateUser(user: User): Completable = usersLocalSource.updateUser(mapDomainUserToLocal(user))
 }

@@ -34,23 +34,11 @@ class UsersAdapter(private val userItemInteractions: UserItemInteractions) :
                 .getString(R.string.user_address_content, user.street, user.city, user.state)
             itemView.user_phone.text = user.phone
 
-            if(user.favorite)
-                itemView.user_favorite.setImageResource(R.drawable.ic_favorite)
-            else
-                itemView.user_favorite.setImageResource(R.drawable.ic_favorite_unselected)
-
             setUserImage(itemView.user_image, user.gender, user.largePicture)
 
             itemView.setOnClickListener {
                 Timber.i("User ${user.id} clicked in position $adapterPosition")
                 userItemInteractions.showUserDetail(user)
-            }
-
-            itemView.user_favorite.setOnClickListener {
-                if(user.favorite)
-                    userItemInteractions.removeUserFromFavorites(user, adapterPosition)
-                else
-                    userItemInteractions.addUserToFavorites(user, adapterPosition)
             }
         }
     }

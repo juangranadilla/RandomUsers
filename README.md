@@ -4,7 +4,7 @@ RandomUsers is a sample Android application with the main goal of show my clean 
 * Get a paged list of random users from a paged API, save them in a local database, and show the list on screen
 * Load more users on scroll
 * See the user details on click
-* *TODO: mark one or more users as favorites*
+* Mark users as favorites
 * *TODO: create a new fragment to show the favorite users list*
 * *TODO: delete users on swipe, and undo the deletion*
 
