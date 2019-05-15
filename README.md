@@ -4,8 +4,8 @@ RandomUsers is a sample Android application with the main goal of show my clean 
 * Get a paged list of random users from a paged API, save them in a local database, and show the list on screen
 * Load more users on scroll
 * See the user details on click
-* *TODO: mark one or more users as favorites*
-* *TODO: create a new fragment to show the favorite users list*
+* Mark users as favorites
+* Show favorite users
 * *TODO: delete users on swipe, and undo the deletion*
 
 ## Architecture & libraries
@@ -23,7 +23,7 @@ I used the following architecture, patterns and libraries:
 
 ## Screenshots
 
-<img src="screenshots/users_screen.png" width=250> <img src="screenshots/user_detail_screen.png" width=250> <img src="screenshots/settings_deeplink_screen.png" width=250>
+<img src="screenshots/users_screen.png" width=200> <img src="screenshots/user_detail_screen.png" width=200> <img src="screenshots/favorite_users_screen.png" width=200> <img src="screenshots/settings_deeplink_screen.png" width=200>
 
 License
 -------

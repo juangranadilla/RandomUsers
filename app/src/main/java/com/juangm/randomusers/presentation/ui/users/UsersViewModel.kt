@@ -14,7 +14,11 @@ class UsersViewModel(private val getUserListUseCase: GetUserListUseCase): ViewMo
     val users: LiveData<PagedList<User>>
         get() = _users
 
-    fun getUsers() {
+    init {
+        getUsers()
+    }
+
+    private fun getUsers() {
         Timber.i("Executing GetUserListUseCase...")
         getUserListUseCase.execute(
             { users -> _users.value = users },
@@ -24,7 +28,7 @@ class UsersViewModel(private val getUserListUseCase: GetUserListUseCase): ViewMo
 
     override fun onCleared() {
         super.onCleared()
-        Timber.i("GetUserListUseCase disposed")
         getUserListUseCase.dispose()
+        Timber.i("Use cases disposed")
     }
 }

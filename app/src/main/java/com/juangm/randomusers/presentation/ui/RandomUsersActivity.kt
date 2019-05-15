@@ -4,19 +4,17 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.juangm.randomusers.R
+import kotlinx.android.synthetic.main.activity_users.*
 
 class RandomUsersActivity : AppCompatActivity() {
 
@@ -27,6 +25,7 @@ class RandomUsersActivity : AppCompatActivity() {
         setContentView(R.layout.activity_users)
 
         setupNavigation()
+        setupBottomAppBar()
     }
 
     private fun setupNavigation() {
@@ -38,6 +37,17 @@ class RandomUsersActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    private fun setupBottomAppBar() {
+        bottom_app_bar.replaceMenu(R.menu.appbar_menu)
+        bottom_app_bar.setOnMenuItemClickListener { item ->
+            when(item.itemId) {
+                R.id.settingsFragment -> item.onNavDestinationSelected(findNavController(R.id.users_nav_host_fragment))
+                R.id.notification -> showDeppLinkNotification()
+            }
+            onOptionsItemSelected(item)
+        }
     }
 
     private fun getSettingsDeepLink() = findNavController(R.id.users_nav_host_fragment)
@@ -56,7 +66,7 @@ class RandomUsersActivity : AppCompatActivity() {
         val builder = NotificationCompat.Builder(this, "deeplink")
             .setContentTitle("Settings")
             .setContentText("Deep link to settings")
-            .setSmallIcon(R.drawable.ic_notification)
+            .setSmallIcon(R.drawable.ic_notification_appbar)
             .setContentIntent(getSettingsDeepLink())
             .setAutoCancel(true)
         notificationManager.notify(0, builder.build())
@@ -64,18 +74,5 @@ class RandomUsersActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.users_nav_host_fragment).navigateUp(appBarConfiguration)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.overflow_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.settingsFragment -> return item.onNavDestinationSelected(findNavController(R.id.users_nav_host_fragment))
-            R.id.notification -> showDeppLinkNotification()
-        }
-        return super.onOptionsItemSelected(item)
     }
 }
