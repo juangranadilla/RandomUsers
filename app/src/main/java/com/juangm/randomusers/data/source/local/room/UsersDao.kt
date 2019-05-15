@@ -15,7 +15,7 @@ interface UsersDao {
     @Query("SELECT * FROM random_users")
     fun getUsers(): DataSource.Factory<Int, UserEntity>
 
-    @Query("SELECT * FROM random_users WHERE favorite = 1")
+    @Query("SELECT * FROM random_users WHERE favorite = 1 ORDER BY name ASC")
     fun getFavoriteUsers(): Single<List<UserEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
