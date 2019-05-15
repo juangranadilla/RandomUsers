@@ -11,7 +11,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
-import com.juangm.randomusers.presentation.ui.utils.setUserImage
+import com.juangm.randomusers.presentation.ui.common.setUserImage
 import kotlinx.android.synthetic.main.activity_users.*
 import kotlinx.android.synthetic.main.fragment_user_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel

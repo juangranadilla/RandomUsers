@@ -28,7 +28,7 @@ class UsersViewModel(private val getUserListUseCase: GetUserListUseCase): ViewMo
 
     override fun onCleared() {
         super.onCleared()
-        Timber.i("Use cases disposed")
         getUserListUseCase.dispose()
+        Timber.i("Use cases disposed")
     }
 }

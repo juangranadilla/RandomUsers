@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
+import com.juangm.randomusers.presentation.ui.common.UserItemInteractions
 import kotlinx.android.synthetic.main.activity_users.*
 import kotlinx.android.synthetic.main.fragment_users.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -44,8 +45,9 @@ class UsersFragment : Fragment(), UserItemInteractions {
                 bottomAppBarButton.show()
 
             bottomAppBarButton.setOnClickListener {
-                //TODO navigate to favorite users fragment
-                Timber.i("Navigate to favorite users fragment")
+                Timber.i("Showing favorite users")
+                val direction = UsersFragmentDirections.actionUsersFragmentToFavoriteUsersFragment()
+                findNavController().navigate(direction)
             }
         }
 
@@ -64,6 +66,11 @@ class UsersFragment : Fragment(), UserItemInteractions {
         usersViewModel.users.observe(this, Observer { users ->
             Timber.i("Users value has changed. Submitting changes to adapter. Users: ${users.size}")
             adapter.submitList(users)
+
+            if(users.isNotEmpty())
+                users_empty_constraint.visibility = View.GONE
+            else
+                users_empty_constraint.visibility = View.VISIBLE
         })
     }
 

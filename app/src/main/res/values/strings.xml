@@ -2,7 +2,10 @@
     <string name="app_name">RandomUsers</string>
 
     <string name="fragment_users_title">Users list</string>
+    <string name="fragment_users_empty_list">We couldn\'t get the users</string>
     <string name="fragment_user_detail_title">User detail</string>
+    <string name="fragment_favorite_users_title">Favorite users</string>
+    <string name="fragment_favorite_users_empty_list">No favorite users yet</string>
     <string name="fragment_settings">Settings</string>
 
     <string name="user_name">Name and surname</string>

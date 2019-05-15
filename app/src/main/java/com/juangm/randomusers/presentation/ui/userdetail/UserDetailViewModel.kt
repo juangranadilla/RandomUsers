@@ -27,5 +27,6 @@ class UserDetailViewModel(private val updateUserUseCase: UpdateUserUseCase): Vie
     override fun onCleared() {
         super.onCleared()
         updateUserUseCase.dispose()
+        Timber.i("Use cases disposed")
     }
 }
