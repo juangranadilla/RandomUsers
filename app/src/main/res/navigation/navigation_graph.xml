@@ -17,6 +17,13 @@
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
 
+        <action android:id="@+id/action_usersFragment_to_favoriteUsersFragment"
+                app:destination="@id/favoriteUsersFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
     </fragment>
 
     <fragment android:id="@+id/userDetailFragment"
@@ -34,4 +41,18 @@
               android:name="com.juangm.randomusers.presentation.ui.settings.SettingsFragment"
               android:label="@string/fragment_settings"
               tools:layout="@layout/fragment_settings"/>
+
+    <fragment android:id="@+id/favoriteUsersFragment"
+              android:name="com.juangm.randomusers.presentation.ui.favorites.FavoriteUsersFragment"
+              android:label="@string/fragment_favorite_users_title"
+              tools:layout="@layout/fragment_favorite_users">
+
+        <action android:id="@+id/action_favoriteUsersFragment_to_userDetailFragment"
+                app:destination="@id/userDetailFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+    </fragment>
 </navigation>

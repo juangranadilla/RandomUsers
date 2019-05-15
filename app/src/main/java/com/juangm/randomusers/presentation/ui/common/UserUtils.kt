@@ -1,4 +1,4 @@
-package com.juangm.randomusers.presentation.ui.utils
+package com.juangm.randomusers.presentation.ui.common
 
 import android.graphics.Color
 import android.widget.ImageView

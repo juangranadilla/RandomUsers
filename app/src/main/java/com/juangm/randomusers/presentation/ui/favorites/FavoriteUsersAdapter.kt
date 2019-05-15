@@ -1,9 +1,9 @@
-package com.juangm.randomusers.presentation.ui.users
+package com.juangm.randomusers.presentation.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
@@ -13,8 +13,8 @@ import com.juangm.randomusers.presentation.ui.common.setUserImage
 import kotlinx.android.synthetic.main.item_user.view.*
 import timber.log.Timber
 
-class UsersAdapter(private val userItemInteractions: UserItemInteractions) :
-    PagedListAdapter<User, UsersAdapter.UserViewHolder>(UserDiffCallback()) {
+class FavoriteUsersAdapter(private val userItemInteractions: UserItemInteractions) :
+    ListAdapter<User, FavoriteUsersAdapter.UserViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
