@@ -3,10 +3,18 @@
 
     <string name="fragment_users_title">Users list</string>
     <string name="fragment_users_empty_list">We couldn\'t get the users</string>
+
     <string name="fragment_user_detail_title">User detail</string>
+    <string name="fragment_user_detail_favorite_selected">User added to favorites</string>
+    <string name="fragment_user_detail_favorite_unselected">User removed from favorites</string>
+
     <string name="fragment_favorite_users_title">Favorite users</string>
     <string name="fragment_favorite_users_empty_list">No favorite users yet</string>
+
     <string name="fragment_settings">Settings</string>
+    <string name="fragment_settings_delete_button">Delete users</string>
+    <string name="fragment_settings_delete_text">Click this button in order to delete all locally saved users</string>
+    <string name="fragment_settings_users_deleted_text">Local users deleted successfully</string>
 
     <string name="user_name">Name and surname</string>
     <string name="user_email">Email</string>
@@ -19,4 +27,6 @@
 
     <string name="menu_settings">Settings</string>
     <string name="menu_notification">Notification</string>
+
+    <string name="snackbar_ok">OK</string>
 </resources>

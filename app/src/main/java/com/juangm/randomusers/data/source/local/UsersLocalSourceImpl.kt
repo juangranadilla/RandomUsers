@@ -21,4 +21,6 @@ class UsersLocalSourceImpl(private val usersDatabase: UsersDatabase): UsersLocal
     override fun saveUsersInDatabase(users: List<UserEntity>) = usersDatabase.usersDao().insertUsers(users)
 
     override fun updateUser(user: UserEntity): Completable = usersDatabase.usersDao().update(user)
+
+    override fun deleteLocalUsers(): Completable = usersDatabase.usersDao().deleteAllUsers()
 }

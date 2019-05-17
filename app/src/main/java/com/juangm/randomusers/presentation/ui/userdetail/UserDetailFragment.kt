@@ -12,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
 import com.juangm.randomusers.presentation.ui.common.setUserImage
+import com.juangm.randomusers.presentation.ui.common.showSnackbar
 import kotlinx.android.synthetic.main.activity_users.*
 import kotlinx.android.synthetic.main.fragment_user_detail.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -79,6 +80,13 @@ class UserDetailFragment : Fragment() {
             userDetailViewModel.favorite.observe(this, Observer { favorite ->
                 Timber.i("User favorite state has changed to $favorite")
                 setFavoriteFabIcon(favorite, bottomAppBarButton)
+
+                if(favorite)
+                    showSnackbar(view, R.string.fragment_user_detail_favorite_selected,
+                        resources.getColor(R.color.colorSecondary, null), R.id.favorite_users_button)
+                else
+                    showSnackbar(view, R.string.fragment_user_detail_favorite_unselected,
+                        resources.getColor(R.color.colorSecondary, null), R.id.favorite_users_button)
             })
         }
     }

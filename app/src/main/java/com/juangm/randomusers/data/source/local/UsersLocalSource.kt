@@ -12,4 +12,5 @@ interface UsersLocalSource {
     fun getFavoriteUsersFromDatabase(): Single<List<User>>
     fun saveUsersInDatabase(users: List<UserEntity>)
     fun updateUser(user: UserEntity): Completable
+    fun deleteLocalUsers(): Completable
 }
