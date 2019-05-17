@@ -50,6 +50,8 @@ class UsersBoundaryCallback(
     private fun getUsersFromApi(usersCount: Int): Single<List<UserEntity>> {
         if(usersCount != 0)
             nextPage = (usersCount / DEFAULT_PAGE_SIZE) + 1
+        else
+            nextPage = 1
 
         return usersRemoteSource.getUsersFromApi(nextPage)
             .map { users -> users.map(mapDomainUserToLocal) }

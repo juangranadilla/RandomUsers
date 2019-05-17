@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.juangm.randomusers.BuildConfig
 import com.juangm.randomusers.data.repository.UsersRepository
 import com.juangm.randomusers.data.repository.UsersRepositoryImpl
+import com.juangm.randomusers.data.source.UsersBoundaryCallback
 import com.juangm.randomusers.data.source.local.UsersLocalSource
 import com.juangm.randomusers.data.source.local.UsersLocalSourceImpl
 import com.juangm.randomusers.data.source.local.room.UsersDatabase
@@ -29,7 +30,8 @@ val dataModule = module {
     single { provideUsersDatabase(androidContext()) }
     single { UsersLocalSourceImpl(get()) as UsersLocalSource }
     single { UsersRemoteSourceImpl(get()) as UsersRemoteSource }
-    single { UsersRepositoryImpl(get(), get()) as UsersRepository }
+    single { UsersBoundaryCallback(get(), get()) }
+    single { UsersRepositoryImpl(get(), get(), get()) as UsersRepository }
 }
 
 fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder()

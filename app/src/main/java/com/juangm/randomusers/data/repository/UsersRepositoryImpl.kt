@@ -14,15 +14,18 @@ import io.reactivex.Single
 
 class UsersRepositoryImpl(
     private val usersLocalSource: UsersLocalSource,
-    private val usersRemoteSource: UsersRemoteSource
+    private val usersRemoteSource: UsersRemoteSource,
+    private val usersBoundaryCallback: UsersBoundaryCallback
 ): UsersRepository {
 
     override fun getUserList(): Observable<PagedList<User>> =
         RxPagedListBuilder(usersLocalSource.getUsersFromDatabase(), RepositoryConstants.DEFAULT_PAGE_SIZE)
-            .setBoundaryCallback(UsersBoundaryCallback(usersLocalSource, usersRemoteSource))
+            .setBoundaryCallback(usersBoundaryCallback)
             .buildObservable()
 
     override fun getFavoriteUserList(): Single<List<User>> = usersLocalSource.getFavoriteUsersFromDatabase()
 
     override fun updateUser(user: User): Completable = usersLocalSource.updateUser(mapDomainUserToLocal(user))
+
+    override fun deleteLocalUsers(): Completable = usersLocalSource.deleteLocalUsers()
 }

@@ -23,4 +23,7 @@ interface UsersDao {
 
     @Update
     fun update(user: UserEntity): Completable
+
+    @Query("DELETE FROM random_users")
+    fun deleteAllUsers(): Completable
 }

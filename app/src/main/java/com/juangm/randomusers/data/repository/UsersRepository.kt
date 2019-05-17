@@ -10,4 +10,5 @@ interface UsersRepository {
     fun getUserList(): Observable<PagedList<User>>
     fun getFavoriteUserList(): Single<List<User>>
     fun updateUser(user: User): Completable
+    fun deleteLocalUsers(): Completable
 }
