@@ -14,11 +14,7 @@ class UsersViewModel(private val getUserListUseCase: GetUserListUseCase): ViewMo
     val users: LiveData<PagedList<User>>
         get() = _users
 
-    init {
-        getUsers()
-    }
-
-    private fun getUsers() {
+    fun getUsers() {
         Timber.i("Executing GetUserListUseCase...")
         getUserListUseCase.execute(
             { users -> _users.value = users },

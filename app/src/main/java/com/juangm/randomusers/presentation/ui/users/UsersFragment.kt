@@ -36,6 +36,7 @@ class UsersFragment : Fragment(), UserItemInteractions {
         setBottomAppBar()
         setRecyclerView()
         observeUsers()
+        usersViewModel.getUsers()
     }
 
     private fun setBottomAppBar() {
