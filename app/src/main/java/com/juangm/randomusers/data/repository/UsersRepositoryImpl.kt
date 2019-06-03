@@ -2,9 +2,7 @@ package com.juangm.randomusers.data.repository
 
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
-import com.juangm.randomusers.data.constants.RepositoryConstants
 import com.juangm.randomusers.data.mapper.mapDomainUserToLocal
-import com.juangm.randomusers.data.source.UsersBoundaryCallback
 import com.juangm.randomusers.data.source.local.UsersLocalSource
 import com.juangm.randomusers.data.source.remote.UsersRemoteSource
 import com.juangm.randomusers.domain.models.User
@@ -15,13 +13,10 @@ import io.reactivex.Single
 class UsersRepositoryImpl(
     private val usersLocalSource: UsersLocalSource,
     private val usersRemoteSource: UsersRemoteSource,
-    private val usersBoundaryCallback: UsersBoundaryCallback
+    private val pagedListBuilder: RxPagedListBuilder<Int, User>
 ): UsersRepository {
 
-    override fun getUserList(): Observable<PagedList<User>> =
-        RxPagedListBuilder(usersLocalSource.getUsersFromDatabase(), RepositoryConstants.DEFAULT_PAGE_SIZE)
-            .setBoundaryCallback(usersBoundaryCallback)
-            .buildObservable()
+    override fun getUserList(): Observable<PagedList<User>> = pagedListBuilder.buildObservable()
 
     override fun getFavoriteUserList(): Single<List<User>> = usersLocalSource.getFavoriteUsersFromDatabase()
 
