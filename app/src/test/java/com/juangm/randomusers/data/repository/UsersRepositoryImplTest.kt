@@ -2,6 +2,7 @@ package com.juangm.randomusers.data.repository
 
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
+import com.juangm.randomusers.BaseTest
 import com.juangm.randomusers.data.source.local.UsersLocalSource
 import com.juangm.randomusers.data.source.remote.UsersRemoteSource
 import com.juangm.randomusers.domain.models.User
@@ -20,7 +21,7 @@ import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class UsersRepositoryImplTest {
+class UsersRepositoryImplTest: BaseTest() {
 
     @Mock
     private lateinit var usersLocalSource: UsersLocalSource
