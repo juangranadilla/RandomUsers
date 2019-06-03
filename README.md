@@ -20,6 +20,7 @@ I used the following architecture, patterns and libraries:
 * [Room](https://developer.android.com/topic/libraries/architecture/room) for database
 * [Timber](https://github.com/JakeWharton/timber) for logging
 * [Glide](https://github.com/bumptech/glide) for loading images
+* Some Unit testing using [Mockito](https://site.mockito.org/) and [Google Truth](https://truth.dev/)
 
 ## Screenshots
 

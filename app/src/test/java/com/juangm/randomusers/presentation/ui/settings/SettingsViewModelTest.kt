@@ -10,7 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -32,7 +32,7 @@ class SettingsViewModelTest: BaseTest() {
     @Test
     fun `update user successfully`() {
         val usersDeletedLiveData = settingsViewModel.usersDeleted.testObserver()
-        Mockito.`when`(usersRepository.deleteLocalUsers()).thenReturn(Completable.complete())
+        `when`(usersRepository.deleteLocalUsers()).thenReturn(Completable.complete())
 
         settingsViewModel.deleteLocalUsers()
 
@@ -42,7 +42,7 @@ class SettingsViewModelTest: BaseTest() {
     @Test
     fun `get an error updating user`() {
         val usersDeletedLiveData = settingsViewModel.usersDeleted.testObserver()
-        Mockito.`when`(usersRepository.deleteLocalUsers())
+        `when`(usersRepository.deleteLocalUsers())
             .thenReturn(Completable.error(Throwable("Error deleting users")))
 
         settingsViewModel.deleteLocalUsers()

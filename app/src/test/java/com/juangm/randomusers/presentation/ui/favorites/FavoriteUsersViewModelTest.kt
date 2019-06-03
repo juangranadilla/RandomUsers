@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -35,7 +35,7 @@ class FavoriteUsersViewModelTest: BaseTest() {
     fun `get users list successfully`() {
         val favoriteUsers = mock<List<User>>()
         val favoriteUsersLiveData = favoriteUsersViewModel.favoriteUsers.testObserver()
-        Mockito.`when`(usersRepository.getFavoriteUserList()).thenReturn(Single.just(favoriteUsers))
+        `when`(usersRepository.getFavoriteUserList()).thenReturn(Single.just(favoriteUsers))
 
         favoriteUsersViewModel.getFavoriteUsers()
 
@@ -45,7 +45,7 @@ class FavoriteUsersViewModelTest: BaseTest() {
     @Test
     fun `get an error getting users list`() {
         val favoriteUsersLiveData = favoriteUsersViewModel.favoriteUsers.testObserver()
-        Mockito.`when`(usersRepository.getFavoriteUserList())
+        `when`(usersRepository.getFavoriteUserList())
             .thenReturn(Single.error(Throwable("Error getting favorite users list")))
 
         favoriteUsersViewModel.getFavoriteUsers()
