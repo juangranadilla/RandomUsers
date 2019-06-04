@@ -34,9 +34,14 @@ class UsersRepositoryImplTest: BaseTest() {
 
     private lateinit var usersRepository: UsersRepositoryImpl
 
+    private lateinit var user: User
+
     @Before
     fun setup() {
         usersRepository = UsersRepositoryImpl(usersLocalSource, usersRemoteSource, pagedListBuilder)
+        user = User("id", "name", "surname", "email", "smallPicture",
+            "normalPicture", "largePicture", "phone", "gender", "street",
+            "city", "state", "registered")
     }
 
     @Test
@@ -86,9 +91,6 @@ class UsersRepositoryImplTest: BaseTest() {
 
     @Test
     fun `update user successfully`() {
-        val user = User("id", "name", "surname", "email", "smallPicture",
-            "normalPicture", "largePicture", "phone", "gender", "street",
-            "city", "state", "registered")
         `when`(usersLocalSource.updateUser(any())).thenReturn(Completable.complete())
 
         val testObserver = usersRepository.updateUser(user).test()
@@ -99,9 +101,6 @@ class UsersRepositoryImplTest: BaseTest() {
 
     @Test
     fun `error updating user`() {
-        val user = User("id", "name", "surname", "email", "smallPicture",
-            "normalPicture", "largePicture", "phone", "gender", "street",
-            "city", "state", "registered")
         val throwable = Throwable("Error updating user")
         `when`(usersLocalSource.updateUser(any())).thenReturn(Completable.error(throwable))
 

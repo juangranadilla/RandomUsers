@@ -60,8 +60,14 @@ class UsersBoundaryCallback(
 
     private fun saveUsersInDatabase(users: List<UserEntity>) {
         if(users.isNotEmpty()) {
-            usersLocalSource.saveUsersInDatabase(users)
-            Timber.i("${users.size} users saved in database")
+            val disposable = usersLocalSource.saveUsersInDatabase(users)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .doOnComplete {
+                    Timber.i("${users.size} users saved in database")
+                }
+                .subscribe()
+            disposables.add(disposable)
         }
     }
 }
