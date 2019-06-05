@@ -9,10 +9,10 @@ abstract class ObservableUseCase<T, Params> : BaseUseCase<T>() {
     abstract fun useCaseExecution(params: Params): Observable<T>
 
     fun execute(onNext: (T) -> Unit, onError: (Throwable) -> Unit = {}, params: Params) {
-        val single = useCaseExecution(params)
+        val observable = useCaseExecution(params)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-        val disposable = single
+        val disposable = observable
             .subscribeWith(disposableObserver(onNext, onError))
         disposables.add(disposable)
     }

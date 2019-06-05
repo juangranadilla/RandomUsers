@@ -19,7 +19,7 @@ interface UsersDao {
     fun getFavoriteUsers(): Single<List<UserEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUsers(users: List<UserEntity>)
+    fun insertUsers(users: List<UserEntity>): Completable
 
     @Update
     fun update(user: UserEntity): Completable

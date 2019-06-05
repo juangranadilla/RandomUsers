@@ -35,7 +35,7 @@ val dataModule = module {
     single { UsersRemoteSourceImpl(get()) as UsersRemoteSource }
     single { UsersBoundaryCallback(get(), get()) }
     single { provideRxPagedListBuilder(get(), get()) }
-    single { UsersRepositoryImpl(get(), get(), get()) as UsersRepository }
+    single { UsersRepositoryImpl(get(), get()) as UsersRepository }
 }
 
 fun provideOkHttpClient(): OkHttpClient = OkHttpClient().newBuilder()

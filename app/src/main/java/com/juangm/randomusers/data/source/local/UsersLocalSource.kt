@@ -10,7 +10,7 @@ interface UsersLocalSource {
     fun getUsersCountFromDatabase(): Single<Int>
     fun getUsersFromDatabase(): DataSource.Factory<Int, User>
     fun getFavoriteUsersFromDatabase(): Single<List<User>>
-    fun saveUsersInDatabase(users: List<UserEntity>)
+    fun saveUsersInDatabase(users: List<UserEntity>): Completable
     fun updateUser(user: UserEntity): Completable
     fun deleteLocalUsers(): Completable
 }
