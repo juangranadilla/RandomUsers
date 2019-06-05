@@ -4,7 +4,6 @@ import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.juangm.randomusers.BaseTest
 import com.juangm.randomusers.data.source.local.UsersLocalSource
-import com.juangm.randomusers.data.source.remote.UsersRemoteSource
 import com.juangm.randomusers.domain.models.User
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
@@ -27,16 +26,18 @@ class UsersRepositoryImplTest: BaseTest() {
     private lateinit var usersLocalSource: UsersLocalSource
 
     @Mock
-    private lateinit var usersRemoteSource: UsersRemoteSource
-
-    @Mock
     private lateinit var pagedListBuilder: RxPagedListBuilder<Int, User>
 
     private lateinit var usersRepository: UsersRepositoryImpl
 
+    private lateinit var user: User
+
     @Before
     fun setup() {
-        usersRepository = UsersRepositoryImpl(usersLocalSource, usersRemoteSource, pagedListBuilder)
+        usersRepository = UsersRepositoryImpl(usersLocalSource, pagedListBuilder)
+        user = User("id", "name", "surname", "email", "smallPicture",
+            "normalPicture", "largePicture", "phone", "gender", "street",
+            "city", "state", "registered")
     }
 
     @Test
@@ -86,9 +87,6 @@ class UsersRepositoryImplTest: BaseTest() {
 
     @Test
     fun `update user successfully`() {
-        val user = User("id", "name", "surname", "email", "smallPicture",
-            "normalPicture", "largePicture", "phone", "gender", "street",
-            "city", "state", "registered")
         `when`(usersLocalSource.updateUser(any())).thenReturn(Completable.complete())
 
         val testObserver = usersRepository.updateUser(user).test()
@@ -99,9 +97,6 @@ class UsersRepositoryImplTest: BaseTest() {
 
     @Test
     fun `error updating user`() {
-        val user = User("id", "name", "surname", "email", "smallPicture",
-            "normalPicture", "largePicture", "phone", "gender", "street",
-            "city", "state", "registered")
         val throwable = Throwable("Error updating user")
         `when`(usersLocalSource.updateUser(any())).thenReturn(Completable.error(throwable))
 
