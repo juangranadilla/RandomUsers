@@ -4,7 +4,6 @@ import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.juangm.randomusers.data.mapper.mapDomainUserToLocal
 import com.juangm.randomusers.data.source.local.UsersLocalSource
-import com.juangm.randomusers.data.source.remote.UsersRemoteSource
 import com.juangm.randomusers.domain.models.User
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -12,7 +11,6 @@ import io.reactivex.Single
 
 class UsersRepositoryImpl(
     private val usersLocalSource: UsersLocalSource,
-    private val usersRemoteSource: UsersRemoteSource,
     private val pagedListBuilder: RxPagedListBuilder<Int, User>
 ): UsersRepository {
 
