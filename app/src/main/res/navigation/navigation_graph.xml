@@ -35,6 +35,10 @@
                 android:name="user"
                 app:argType="com.juangm.randomusers.domain.models.User"/>
 
+        <argument
+                android:name="position"
+                app:argType="integer"/>
+
     </fragment>
 
     <fragment android:id="@+id/settingsFragment"

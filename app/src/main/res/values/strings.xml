@@ -29,4 +29,6 @@
     <string name="menu_notification">Notification</string>
 
     <string name="snackbar_ok">OK</string>
+
+    <string name="user_image_transition">user_image_transition_%1$d</string>
 </resources>

@@ -8,6 +8,7 @@ import com.juangm.randomusers.data.source.local.room.entity.UserEntity
 import com.juangm.randomusers.data.source.remote.UsersRemoteSource
 import com.juangm.randomusers.domain.models.User
 import io.reactivex.Single
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
@@ -18,6 +19,7 @@ class UsersBoundaryCallback(
 
     private var nextPage = 1
     private var isRequestRunning = false
+    private val disposables = CompositeDisposable()
 
     override fun onZeroItemsLoaded() {
         Timber.i("onZeroItemsLoaded")
@@ -33,13 +35,16 @@ class UsersBoundaryCallback(
         if(isRequestRunning) return
 
         isRequestRunning = true
-        usersLocalSource.getUsersCountFromDatabase()
+        val disposable = usersLocalSource.getUsersCountFromDatabase()
             .flatMap { usersCount -> getUsersFromApi(usersCount) }
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
-            .doOnError { it.printStackTrace() }
             .doFinally { isRequestRunning = false }
-            .subscribe()
+            .subscribe(
+                { Timber.i("$nextPage page retrieved from API and users saved in database successfully") },
+                { it.printStackTrace() }
+            )
+        disposables.add(disposable)
     }
 
     private fun getUsersFromApi(usersCount: Int): Single<List<UserEntity>> {
@@ -47,21 +52,19 @@ class UsersBoundaryCallback(
 
         return usersRemoteSource.getUsersFromApi(nextPage)
             .map { users -> users.map(mapDomainUserToLocal) }
-            .doOnSuccess { users ->
-                Timber.i("${users.size} users returned from page $nextPage from API")
-                saveUsersInDatabase(users)
-            }
-            .doOnError { it.printStackTrace() }
+            .doOnSuccess { users -> saveUsersInDatabase(users) }
     }
 
     private fun saveUsersInDatabase(users: List<UserEntity>) {
         if(users.isNotEmpty()) {
-            usersLocalSource.saveUsersInDatabase(users)
+            val disposable = usersLocalSource.saveUsersInDatabase(users)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .doOnComplete { Timber.i("${users.size} users saved in database") }
-                .doOnError { it.printStackTrace() }
+                .doOnComplete {
+                    Timber.i("${users.size} users saved in database")
+                }
                 .subscribe()
+            disposables.add(disposable)
         }
     }
 }
