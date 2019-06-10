@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juangm.randomusers.R
@@ -67,9 +69,10 @@ class FavoriteUsersFragment : Fragment(), UserItemInteractions {
         })
     }
 
-    override fun showUserDetail(user: User) {
+    override fun showUserDetail(user: User, userImage: ImageView, position: Int) {
         Timber.i("Showing detail for favorite user ${user.id}")
-        val direction = FavoriteUsersFragmentDirections.actionFavoriteUsersFragmentToUserDetailFragment(user)
-        findNavController().navigate(direction)
+        val direction = FavoriteUsersFragmentDirections.actionFavoriteUsersFragmentToUserDetailFragment(user, position)
+        val extras = FragmentNavigatorExtras(userImage to userImage.transitionName)
+        findNavController().navigate(direction, extras)
     }
 }

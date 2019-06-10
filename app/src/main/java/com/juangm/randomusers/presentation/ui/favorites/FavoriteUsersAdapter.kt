@@ -42,9 +42,11 @@ class FavoriteUsersAdapter(private val userItemInteractions: UserItemInteraction
                 user.largePicture
             )
 
-            itemView.setOnClickListener {
+            itemView.setOnClickListener { itemView ->
                 Timber.i("User ${user.id} clicked in position $adapterPosition")
-                userItemInteractions.showUserDetail(user)
+                itemView.user_image.transitionName = itemView.context
+                    .getString(R.string.user_image_transition, adapterPosition)
+                userItemInteractions.showUserDetail(user, itemView.user_image, adapterPosition)
             }
         }
     }
