@@ -1,5 +1,6 @@
 package com.juangm.randomusers.presentation.ui.userdetail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -52,9 +53,17 @@ class UserDetailFragment : Fragment() {
         user_gender.text = user.gender
         user_address.text = getString(R.string.user_address_content, user.street, user.city, user.state)
         user_registered.text = user.registered
-        setUserImage(user_image, user.gender, user.largePicture)
-        setBottomAppBar(user)
+
         user_image.transitionName = getString(R.string.user_image_transition, position)
+        setUserImage(
+            user_image,
+            user.gender,
+            Color.WHITE,
+            4f,
+            user.largePicture
+        )
+
+        setBottomAppBar(user)
     }
 
     private fun setBottomAppBar(user: User) {

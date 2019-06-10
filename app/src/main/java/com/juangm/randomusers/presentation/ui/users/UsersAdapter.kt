@@ -1,5 +1,6 @@
 package com.juangm.randomusers.presentation.ui.users
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,11 +37,10 @@ class UsersAdapter(private val userItemInteractions: UserItemInteractions) :
                 .getString(R.string.user_address_content, user.street, user.city, user.state)
             itemView.user_phone.text = user.phone
 
-            setUserImage(
-                itemView.user_image,
-                user.gender,
-                user.largePicture
-            )
+            if(user.favorite)
+                setUserImage(user, itemView, itemView.context.getColor(R.color.colorSecondary), 4f)
+            else
+                setUserImage(user, itemView)
 
             itemView.setOnClickListener { itemView ->
                 Timber.i("User ${user.id} clicked in position $adapterPosition")
@@ -48,6 +48,16 @@ class UsersAdapter(private val userItemInteractions: UserItemInteractions) :
                     .getString(R.string.user_image_transition, adapterPosition)
                 userItemInteractions.showUserDetail(user, itemView.user_image, adapterPosition)
             }
+        }
+
+        private fun setUserImage(user: User, itemView: View, borderColor: Int = Color.GRAY, borderSize: Float = 3f) {
+            setUserImage(
+                itemView.user_image,
+                user.gender,
+                borderColor,
+                borderSize,
+                user.largePicture
+            )
         }
     }
 }
