@@ -9,16 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
-import com.juangm.randomusers.presentation.ui.common.UserItemInteractions
+import com.juangm.randomusers.presentation.ui.common.FavoriteUserItemInteractions
+import com.juangm.randomusers.presentation.ui.common.SwipeToDeleteCallback
 import kotlinx.android.synthetic.main.activity_users.*
 import kotlinx.android.synthetic.main.fragment_favorite_users.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class FavoriteUsersFragment : Fragment(), UserItemInteractions {
+class FavoriteUsersFragment : Fragment(), FavoriteUserItemInteractions {
 
     private val favoriteUsersViewModel by viewModel<FavoriteUsersViewModel>()
     private lateinit var adapter: FavoriteUsersAdapter
@@ -55,6 +57,7 @@ class FavoriteUsersFragment : Fragment(), UserItemInteractions {
         adapter = FavoriteUsersAdapter(this)
         favorite_users_recycler.layoutManager = LinearLayoutManager(context)
         favorite_users_recycler.adapter = adapter
+        ItemTouchHelper(SwipeToDeleteCallback(adapter)).attachToRecyclerView(favorite_users_recycler)
     }
 
     private fun observeUsers() {
@@ -74,5 +77,9 @@ class FavoriteUsersFragment : Fragment(), UserItemInteractions {
         val direction = FavoriteUsersFragmentDirections.actionFavoriteUsersFragmentToUserDetailFragment(user, position)
         val extras = FragmentNavigatorExtras(userImage to userImage.transitionName)
         findNavController().navigate(direction, extras)
+    }
+
+    override fun removeUserFromFavorites(user: User) {
+        favoriteUsersViewModel.updateUser(user)
     }
 }
