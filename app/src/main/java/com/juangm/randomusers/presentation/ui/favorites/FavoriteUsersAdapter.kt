@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
+import com.juangm.randomusers.presentation.ui.common.FavoriteUserItemInteractions
 import com.juangm.randomusers.presentation.ui.common.UserDiffCallback
 import com.juangm.randomusers.presentation.ui.common.UserItemInteractions
 import com.juangm.randomusers.presentation.ui.common.setUserImage
 import kotlinx.android.synthetic.main.item_user.view.*
 import timber.log.Timber
 
-class FavoriteUsersAdapter(private val userItemInteractions: UserItemInteractions) :
+class FavoriteUsersAdapter(private val favoriteUserItemInteractions: FavoriteUserItemInteractions) :
     ListAdapter<User, FavoriteUsersAdapter.UserViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -24,7 +25,11 @@ class FavoriteUsersAdapter(private val userItemInteractions: UserItemInteraction
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         Timber.d("Binding view holder at position $position")
         val user = getItem(position)
-        user?.let { holder.bind(user, userItemInteractions) }
+        user?.let { holder.bind(user, favoriteUserItemInteractions) }
+    }
+
+    fun swipeItem(position: Int) {
+        favoriteUserItemInteractions.removeUserFromFavorites(getItem(position))
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,7 +45,7 @@ class FavoriteUsersAdapter(private val userItemInteractions: UserItemInteraction
                 itemView.user_image,
                 user.gender,
                 itemView.context.getColor(R.color.colorSecondary),
-                4f,
+                6f,
                 user.largePicture
             )
 
