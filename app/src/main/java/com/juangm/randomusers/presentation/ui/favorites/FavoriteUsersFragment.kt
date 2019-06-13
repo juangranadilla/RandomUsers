@@ -15,6 +15,7 @@ import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
 import com.juangm.randomusers.presentation.ui.common.FavoriteUserItemInteractions
 import com.juangm.randomusers.presentation.ui.common.SwipeToDeleteCallback
+import com.juangm.randomusers.presentation.ui.common.showSnackbar
 import kotlinx.android.synthetic.main.activity_users.*
 import kotlinx.android.synthetic.main.fragment_favorite_users.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -38,7 +39,8 @@ class FavoriteUsersFragment : Fragment(), FavoriteUserItemInteractions {
 
         setBottomAppBar()
         setRecyclerView()
-        observeUsers()
+        observeFavoriteUsersList()
+        observeUserRemovedFromFavorites()
     }
 
     override fun onResume() {
@@ -60,8 +62,8 @@ class FavoriteUsersFragment : Fragment(), FavoriteUserItemInteractions {
         ItemTouchHelper(SwipeToDeleteCallback(adapter)).attachToRecyclerView(favorite_users_recycler)
     }
 
-    private fun observeUsers() {
-        favoriteUsersViewModel.favoriteUsers.observe(this, Observer { favoriteUsers ->
+    private fun observeFavoriteUsersList() {
+        favoriteUsersViewModel.favoriteUsers.observe(viewLifecycleOwner, Observer { favoriteUsers ->
             Timber.i("Favorite users value has changed. Submitting changes to adapter. Users: ${favoriteUsers.size}")
             adapter.submitList(favoriteUsers)
 
@@ -72,6 +74,29 @@ class FavoriteUsersFragment : Fragment(), FavoriteUserItemInteractions {
         })
     }
 
+    private fun observeUserRemovedFromFavorites() {
+        favoriteUsersViewModel.updateUserEvent.observe(viewLifecycleOwner, Observer { updatedUserEvent ->
+            updatedUserEvent.getContentIfNotHandled()?.let { user ->
+                Timber.i("updated user value has changed. User: ${user.id}")
+                if(!user.favorite) {
+                    showUserRemovedFromFavoritesSnackbar(user)
+                }
+            }
+        })
+    }
+
+    private fun showUserRemovedFromFavoritesSnackbar(recentlyUpdatedUser: User) {
+        showSnackbar(
+            view,
+            R.string.fragment_favorite_users_snackbar_message,
+            resources.getColor(R.color.colorSecondary, null),
+            R.id.bottom_app_bar,
+            R.string.snackbar_undo
+        ) {
+            favoriteUsersViewModel.addUserToFavorites(recentlyUpdatedUser)
+        }
+    }
+
     override fun showUserDetail(user: User, userImage: ImageView, position: Int) {
         Timber.i("Showing detail for favorite user ${user.id}")
         val direction = FavoriteUsersFragmentDirections.actionFavoriteUsersFragmentToUserDetailFragment(user, position)
@@ -80,6 +105,6 @@ class FavoriteUsersFragment : Fragment(), FavoriteUserItemInteractions {
     }
 
     override fun removeUserFromFavorites(user: User) {
-        favoriteUsersViewModel.updateUser(user)
+        favoriteUsersViewModel.removeUserFromFavorites(user)
     }
 }

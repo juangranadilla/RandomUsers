@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.juangm.randomusers.domain.models.User
 import com.juangm.randomusers.domain.usecase.GetFavoriteUserListUseCase
 import com.juangm.randomusers.domain.usecase.UpdateUserUseCase
+import com.juangm.randomusers.presentation.ui.common.Event
 import timber.log.Timber
 
 class FavoriteUsersViewModel(
@@ -17,6 +18,10 @@ class FavoriteUsersViewModel(
     val favoriteUsers: LiveData<List<User>>
         get() = _favoriteUsers
 
+    private val _updatedUserEvent = MutableLiveData<Event<User>>()
+    val updateUserEvent: LiveData<Event<User>>
+        get() = _updatedUserEvent
+
     fun getFavoriteUsers() {
         Timber.i("Executing GetFavoriteUserListUseCase...")
         getFavoriteUserListUseCase.execute(
@@ -25,12 +30,22 @@ class FavoriteUsersViewModel(
             Unit)
     }
 
-    fun updateUser(user: User) {
-        user.favorite = !user.favorite
+    fun removeUserFromFavorites(user: User) {
+        user.favorite = false
+        updateUser(user)
+    }
+
+    fun addUserToFavorites(user: User) {
+        user.favorite = true
+        updateUser(user)
+    }
+
+    private fun updateUser(user: User) {
         Timber.i("Executing UpdateUserUseCase...")
         updateUserUseCase.execute(
             {
-                Timber.i("UpdateUserUseCase completed")
+                Timber.i("UpdateUserUseCase completed. User favorite: ${user.favorite}")
+                _updatedUserEvent.value = Event(user)
                 getFavoriteUsers()
             },
             { throwable ->  Timber.e(throwable) },

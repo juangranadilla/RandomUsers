@@ -38,7 +38,7 @@ class UsersAdapter(private val userItemInteractions: UserItemInteractions) :
             itemView.user_phone.text = user.phone
 
             if(user.favorite)
-                setUserImage(user, itemView, itemView.context.getColor(R.color.colorSecondary), 4f)
+                setUserImage(user, itemView, itemView.context.getColor(R.color.colorSecondary), 6f)
             else
                 setUserImage(user, itemView)
 

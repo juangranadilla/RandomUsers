@@ -45,7 +45,7 @@ class FavoriteUsersAdapter(private val favoriteUserItemInteractions: FavoriteUse
                 itemView.user_image,
                 user.gender,
                 itemView.context.getColor(R.color.colorSecondary),
-                4f,
+                6f,
                 user.largePicture
             )
 
