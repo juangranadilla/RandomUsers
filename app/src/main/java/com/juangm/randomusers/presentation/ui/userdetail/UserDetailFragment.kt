@@ -1,5 +1,6 @@
 package com.juangm.randomusers.presentation.ui.userdetail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import androidx.transition.TransitionInflater
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.juangm.randomusers.R
@@ -23,6 +25,11 @@ class UserDetailFragment : Fragment() {
     private val args: UserDetailFragmentArgs by navArgs()
     private val userDetailViewModel by viewModel<UserDetailViewModel>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,17 +42,27 @@ class UserDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val user = args.user
-        bindUserData(user)
+        val position = args.position
+        bindUserData(user, position)
         observeFavoriteState()
     }
 
-    private fun bindUserData(user: User) {
+    private fun bindUserData(user: User, position: Int) {
         user_name.text = getString(R.string.user_name_content, user.name, user.surname)
         user_email.text = user.email
         user_gender.text = user.gender
         user_address.text = getString(R.string.user_address_content, user.street, user.city, user.state)
         user_registered.text = user.registered
-        setUserImage(user_image, user.gender, user.largePicture)
+
+        user_image.transitionName = getString(R.string.user_image_transition, position)
+        setUserImage(
+            user_image,
+            user.gender,
+            Color.WHITE,
+            4f,
+            user.largePicture
+        )
+
         setBottomAppBar(user)
     }
 

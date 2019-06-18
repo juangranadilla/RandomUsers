@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.juangm.randomusers.R
 import com.juangm.randomusers.domain.models.User
+import com.juangm.randomusers.presentation.ui.common.FavoriteUserItemInteractions
 import com.juangm.randomusers.presentation.ui.common.UserDiffCallback
 import com.juangm.randomusers.presentation.ui.common.UserItemInteractions
 import com.juangm.randomusers.presentation.ui.common.setUserImage
 import kotlinx.android.synthetic.main.item_user.view.*
 import timber.log.Timber
 
-class FavoriteUsersAdapter(private val userItemInteractions: UserItemInteractions) :
+class FavoriteUsersAdapter(private val favoriteUserItemInteractions: FavoriteUserItemInteractions) :
     ListAdapter<User, FavoriteUsersAdapter.UserViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -24,7 +25,11 @@ class FavoriteUsersAdapter(private val userItemInteractions: UserItemInteraction
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         Timber.d("Binding view holder at position $position")
         val user = getItem(position)
-        user?.let { holder.bind(user, userItemInteractions) }
+        user?.let { holder.bind(user, favoriteUserItemInteractions) }
+    }
+
+    fun swipeItem(position: Int) {
+        favoriteUserItemInteractions.removeUserFromFavorites(getItem(position))
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -39,12 +44,16 @@ class FavoriteUsersAdapter(private val userItemInteractions: UserItemInteraction
             setUserImage(
                 itemView.user_image,
                 user.gender,
+                itemView.context.getColor(R.color.colorSecondary),
+                6f,
                 user.largePicture
             )
 
-            itemView.setOnClickListener {
+            itemView.setOnClickListener { itemView ->
                 Timber.i("User ${user.id} clicked in position $adapterPosition")
-                userItemInteractions.showUserDetail(user)
+                itemView.user_image.transitionName = itemView.context
+                    .getString(R.string.user_image_transition, adapterPosition)
+                userItemInteractions.showUserDetail(user, itemView.user_image, adapterPosition)
             }
         }
     }

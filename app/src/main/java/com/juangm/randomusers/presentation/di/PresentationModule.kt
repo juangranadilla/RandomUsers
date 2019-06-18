@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val presentationModule = module {
     viewModel { UsersViewModel(get()) }
     viewModel { UserDetailViewModel(get()) }
-    viewModel { FavoriteUsersViewModel(get()) }
+    viewModel { FavoriteUsersViewModel(get(), get()) }
     viewModel { SettingsViewModel(get()) }
 }
