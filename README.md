@@ -5,8 +5,8 @@ RandomUsers is a sample Android application with the main goal of show my clean 
 * Load more users on scroll
 * See the user details on click
 * Mark users as favorites
-* Show favorite users
-* *TODO: delete users on swipe, and undo the deletion*
+* Show favorite users list
+* Delete favorite users on swipe, and undo the deletion
 
 ## Architecture & libraries
 I used the following architecture, patterns and libraries:
