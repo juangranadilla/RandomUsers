@@ -1,6 +1,6 @@
 package com.juangm.randomusers.domain.usecase
 
-import com.juangm.randomusers.data.repository.UsersRepository
+import com.juangm.randomusers.domain.repository.UsersRepository
 import com.juangm.randomusers.domain.base.CompletableUseCase
 import io.reactivex.Completable
 

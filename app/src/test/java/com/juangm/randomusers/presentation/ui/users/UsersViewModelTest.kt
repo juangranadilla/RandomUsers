@@ -3,7 +3,7 @@ package com.juangm.randomusers.presentation.ui.users
 import androidx.paging.PagedList
 import com.google.common.truth.Truth
 import com.juangm.randomusers.BaseTest
-import com.juangm.randomusers.data.repository.UsersRepository
+import com.juangm.randomusers.domain.repository.UsersRepository
 import com.juangm.randomusers.domain.models.User
 import com.juangm.randomusers.domain.usecase.GetUserListUseCase
 import com.juangm.randomusers.utils.testObserver

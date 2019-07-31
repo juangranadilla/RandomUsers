@@ -2,7 +2,7 @@ package com.juangm.randomusers.presentation.ui.userdetail
 
 import com.google.common.truth.Truth
 import com.juangm.randomusers.BaseTest
-import com.juangm.randomusers.data.repository.UsersRepository
+import com.juangm.randomusers.domain.repository.UsersRepository
 import com.juangm.randomusers.domain.models.User
 import com.juangm.randomusers.domain.usecase.UpdateUserUseCase
 import com.juangm.randomusers.utils.testObserver

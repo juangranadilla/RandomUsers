@@ -5,7 +5,7 @@ import androidx.paging.RxPagedListBuilder
 import androidx.room.Room
 import com.juangm.randomusers.BuildConfig
 import com.juangm.randomusers.data.constants.RepositoryConstants
-import com.juangm.randomusers.data.repository.UsersRepository
+import com.juangm.randomusers.domain.repository.UsersRepository
 import com.juangm.randomusers.data.repository.UsersRepositoryImpl
 import com.juangm.randomusers.data.source.UsersBoundaryCallback
 import com.juangm.randomusers.data.source.local.UsersLocalSource

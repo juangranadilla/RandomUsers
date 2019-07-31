@@ -2,7 +2,7 @@ package com.juangm.randomusers.presentation.ui.settings
 
 import com.google.common.truth.Truth
 import com.juangm.randomusers.BaseTest
-import com.juangm.randomusers.data.repository.UsersRepository
+import com.juangm.randomusers.domain.repository.UsersRepository
 import com.juangm.randomusers.domain.usecase.DeleteLocalUsersUseCase
 import com.juangm.randomusers.utils.testObserver
 import io.reactivex.Completable
