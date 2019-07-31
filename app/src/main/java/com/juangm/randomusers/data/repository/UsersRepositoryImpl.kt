@@ -5,6 +5,7 @@ import androidx.paging.RxPagedListBuilder
 import com.juangm.randomusers.data.mapper.mapDomainUserToLocal
 import com.juangm.randomusers.data.source.local.UsersLocalSource
 import com.juangm.randomusers.domain.models.User
+import com.juangm.randomusers.domain.repository.UsersRepository
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single

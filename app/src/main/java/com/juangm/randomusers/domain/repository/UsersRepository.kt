@@ -1,4 +1,4 @@
-package com.juangm.randomusers.data.repository
+package com.juangm.randomusers.domain.repository
 
 import androidx.paging.PagedList
 import com.juangm.randomusers.domain.models.User

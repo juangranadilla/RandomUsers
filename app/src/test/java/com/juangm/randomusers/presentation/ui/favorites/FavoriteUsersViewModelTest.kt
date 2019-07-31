@@ -2,7 +2,7 @@ package com.juangm.randomusers.presentation.ui.favorites
 
 import com.google.common.truth.Truth.assertThat
 import com.juangm.randomusers.BaseTest
-import com.juangm.randomusers.data.repository.UsersRepository
+import com.juangm.randomusers.domain.repository.UsersRepository
 import com.juangm.randomusers.domain.models.User
 import com.juangm.randomusers.domain.usecase.GetFavoriteUserListUseCase
 import com.juangm.randomusers.domain.usecase.UpdateUserUseCase
