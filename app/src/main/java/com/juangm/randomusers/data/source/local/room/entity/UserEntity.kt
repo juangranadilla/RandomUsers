@@ -18,6 +18,7 @@ data class UserEntity(
     val street: String,
     val city: String,
     val state: String,
+    val country: String,
     val registered: String,
     var favorite: Boolean = false
 )

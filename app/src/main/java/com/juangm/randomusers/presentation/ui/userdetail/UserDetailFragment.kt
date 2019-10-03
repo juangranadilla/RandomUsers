@@ -51,7 +51,7 @@ class UserDetailFragment : Fragment() {
         user_name.text = getString(R.string.user_name_content, user.name, user.surname)
         user_email.text = user.email
         user_gender.text = user.gender
-        user_address.text = getString(R.string.user_address_content, user.street, user.city, user.state)
+        user_address.text = getString(R.string.user_address_content, user.street, user.city, user.state, user.country)
         user_registered.text = user.registered
 
         user_image.transitionName = getString(R.string.user_image_transition, position)

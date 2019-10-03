@@ -37,7 +37,7 @@ class UsersRepositoryImplTest: BaseTest() {
         usersRepository = UsersRepositoryImpl(usersLocalSource, pagedListBuilder)
         user = User("id", "name", "surname", "email", "smallPicture",
             "normalPicture", "largePicture", "phone", "gender", "street",
-            "city", "state", "registered")
+            "city", "state", "country", "registered")
     }
 
     @Test

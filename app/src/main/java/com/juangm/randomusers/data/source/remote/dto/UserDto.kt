@@ -1,15 +1,15 @@
 package com.juangm.randomusers.data.source.remote.dto
 
 data class UserDto(
-    val gender: String,
-    val name: NameDto,
-    val location: LocationDto,
-    val email: String,
-    val login: LoginDto,
-    val dob: DobDto,
-    val registered: RegisteredDto,
-    val phone: String,
-    val cell: String,
-    val picture: PictureDto,
-    val nat: String 
+    val gender: String? = null,
+    val name: NameDto? = null,
+    val location: LocationDto? = null,
+    val email: String? = null,
+    val login: LoginDto? = null,
+    val dob: DobDto? = null,
+    val registered: RegisteredDto? = null,
+    val phone: String? = null,
+    val cell: String? = null,
+    val picture: PictureDto? = null,
+    val nat: String? = null
 )

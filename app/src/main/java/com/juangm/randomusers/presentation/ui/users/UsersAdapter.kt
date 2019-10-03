@@ -33,8 +33,13 @@ class UsersAdapter(private val userItemInteractions: UserItemInteractions) :
         fun bind(user: User, userItemInteractions: UserItemInteractions) {
             itemView.user_name.text = user.name
             itemView.user_email.text = user.email
-            itemView.user_address.text = itemView.context
-                .getString(R.string.user_address_content, user.street, user.city, user.state)
+            itemView.user_address.text = itemView.context.getString(
+                R.string.user_address_content,
+                user.street,
+                user.city,
+                user.state,
+                user.country
+            )
             itemView.user_phone.text = user.phone
 
             if(user.favorite)
