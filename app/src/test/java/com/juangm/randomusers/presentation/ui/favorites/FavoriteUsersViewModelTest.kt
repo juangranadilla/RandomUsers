@@ -2,8 +2,8 @@ package com.juangm.randomusers.presentation.ui.favorites
 
 import com.google.common.truth.Truth.assertThat
 import com.juangm.randomusers.BaseTest
-import com.juangm.randomusers.domain.repository.UsersRepository
 import com.juangm.randomusers.domain.models.User
+import com.juangm.randomusers.domain.repository.UsersRepository
 import com.juangm.randomusers.domain.usecase.GetFavoriteUserListUseCase
 import com.juangm.randomusers.domain.usecase.UpdateUserUseCase
 import com.juangm.randomusers.presentation.ui.common.Event
@@ -43,7 +43,7 @@ class FavoriteUsersViewModelTest: BaseTest() {
 
         user = User("id", "name", "surname", "email", "smallPicture",
             "normalPicture", "largePicture", "phone", "gender", "street",
-            "city", "state", "registered", false)
+            "city", "state", "country", "registered", false)
     }
 
     @Test

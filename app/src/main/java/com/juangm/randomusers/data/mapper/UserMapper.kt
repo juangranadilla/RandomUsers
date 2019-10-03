@@ -6,19 +6,20 @@ import com.juangm.randomusers.domain.models.User
 
 val mapRemoteUserToDomain: (UserDto) -> User = { user ->
     User(
-        user.login.uuid,
-        user.name.first,
-        user.name.last,
-        user.email,
-        user.picture.thumbnail,
-        user.picture.medium,
-        user.picture.large,
-        user.phone,
-        user.gender,
-        user.location.street,
-        user.location.city,
-        user.location.state,
-        user.registered.date)
+        user.login?.uuid ?: "",
+        user.name?.first ?: "Unknown name",
+        user.name?.last ?: "Unknown last name",
+        user.email ?: "Unknown email",
+        user.picture?.thumbnail ?: "",
+        user.picture?.medium ?: "",
+        user.picture?.large ?: "",
+        user.phone ?: "Unknown phone",
+        user.gender ?: "Unknown gender",
+        user.location?.street?.name ?: "" + " " + user.location?.street?.number ?: "",
+        user.location?.city ?: "Unknown city",
+        user.location?.state ?: "Unknown state",
+        user.location?.country ?: "Unknown country",
+        user.registered?.date ?: "Unknown date")
 }
 
 val mapLocalUserToDomain: (UserEntity) -> User = { user ->
@@ -35,6 +36,7 @@ val mapLocalUserToDomain: (UserEntity) -> User = { user ->
         user.street,
         user.city,
         user.state,
+        user.country,
         user.registered,
         user.favorite)
 }
@@ -53,6 +55,7 @@ val mapDomainUserToLocal: (User) -> UserEntity = { user ->
         user.street,
         user.city,
         user.state,
+        user.country,
         user.registered,
         user.favorite)
 }

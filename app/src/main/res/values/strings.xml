@@ -24,7 +24,7 @@
     <string name="user_registration_date">Registration date</string>
 
     <string name="user_name_content">%1$s %2$s</string>
-    <string name="user_address_content">%1$s, %2$s, %3$s</string>
+    <string name="user_address_content">%1$s, %2$s, %3$s, %4$s</string>
 
     <string name="menu_settings">Settings</string>
     <string name="menu_notification">Notification</string>

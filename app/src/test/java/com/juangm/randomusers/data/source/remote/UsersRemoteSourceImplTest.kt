@@ -30,7 +30,9 @@ class UsersRemoteSourceImplTest: BaseTest() {
     fun `get users from API successfully`() {
         val page = 1
         val nameDto = NameDto("title", "first", "last")
-        val locationDto = LocationDto("street", "city", "state", "zip")
+        val streetDto = StreetDto("number", "name")
+        val locationDto = LocationDto(streetDto, "city", "state",
+            "country", "postCode")
         val loginDto = LoginDto("uuid", "username", "password",
             "salt", "md5", "sha1", "sha256")
         val dobDto = DobDto("date", 27)
@@ -59,5 +61,30 @@ class UsersRemoteSourceImplTest: BaseTest() {
 
         verify(usersService).getUsers(page)
         testObserver.assertError(throwable)
+    }
+
+    @Test
+    fun `check that UserMapper correctly maps the remote user model to domain model, even with null properties`() {
+        val page = 1
+        val nameDto = NameDto(null, null, null)
+        val streetDto = StreetDto(null, null)
+        val locationDto = LocationDto(streetDto, null, null,
+            null, null)
+        val loginDto = LoginDto(null, null, null,
+            null, null, null, null)
+        val dobDto = DobDto(null, null)
+        val registeredDto = RegisteredDto(null, null)
+        val pictureDto = PictureDto(null, null, null)
+        val user = UserDto(null, nameDto, locationDto, null, loginDto, dobDto, registeredDto,
+            null, null, pictureDto, null)
+        val responseDto = mock<ResponseDto> {
+            on(it.results).thenReturn(listOf(user))
+        }
+        `when`(usersService.getUsers(page)).thenReturn(Single.just(responseDto))
+
+        val testObserver = usersRemoteSource.getUsersFromApi(page).test()
+
+        verify(usersService).getUsers(page)
+        testObserver.assertComplete()
     }
 }
