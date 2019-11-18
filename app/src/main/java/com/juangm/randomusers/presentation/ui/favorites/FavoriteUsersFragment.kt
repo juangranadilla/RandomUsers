@@ -97,7 +97,7 @@ class FavoriteUsersFragment : Fragment(), FavoriteUserItemInteractions {
         }
     }
 
-    override fun showUserDetail(user: User, userImage: ImageView, position: Int) {
+    override fun navigateToUserDetail(user: User, userImage: ImageView, position: Int) {
         Timber.i("Showing detail for favorite user ${user.id}")
         val direction = FavoriteUsersFragmentDirections.actionFavoriteUsersFragmentToUserDetailFragment(user, position)
         val extras = FragmentNavigatorExtras(userImage to userImage.transitionName)
