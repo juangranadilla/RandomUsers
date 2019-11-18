@@ -51,7 +51,7 @@ class UsersAdapter(private val userItemInteractions: UserItemInteractions) :
                 Timber.i("User ${user.id} clicked in position $adapterPosition")
                 itemView.user_image.transitionName = itemView.context
                     .getString(R.string.user_image_transition, adapterPosition)
-                userItemInteractions.showUserDetail(user, itemView.user_image, adapterPosition)
+                userItemInteractions.navigateToUserDetail(user, itemView.user_image, adapterPosition)
             }
         }
 

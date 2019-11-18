@@ -45,6 +45,7 @@ class UserDetailFragment : Fragment() {
         val position = args.position
         bindUserData(user, position)
         observeFavoriteState()
+        observeFavoriteUsersButton()
     }
 
     private fun bindUserData(user: User, position: Int) {
@@ -106,5 +107,14 @@ class UserDetailFragment : Fragment() {
                         resources.getColor(R.color.colorSecondary, null), R.id.favorite_users_button)
             })
         }
+    }
+
+    private fun observeFavoriteUsersButton() {
+        userDetailViewModel.favoriteUsersButtonEnabled.observe(
+            this,
+            Observer { favoriteUsersButtonEnabled ->
+                activity?.favorite_users_button?.isEnabled = favoriteUsersButtonEnabled
+            }
+        )
     }
 }

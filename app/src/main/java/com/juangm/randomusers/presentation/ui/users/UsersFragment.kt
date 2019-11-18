@@ -34,7 +34,6 @@ class UsersFragment : Fragment(), UserItemInteractions {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setBottomAppBar()
         setRecyclerView()
         observeUsers()
@@ -42,15 +41,15 @@ class UsersFragment : Fragment(), UserItemInteractions {
     }
 
     private fun setBottomAppBar() {
-        activity?.favorite_users_button?.let { bottomAppBarButton ->
-            bottomAppBarButton.setImageResource(R.drawable.ic_favorite_appbar)
-            if(bottomAppBarButton.isOrWillBeHidden)
-                bottomAppBarButton.show()
+        activity?.favorite_users_button?.let { favoriteUsersButton ->
+            favoriteUsersButton.setImageResource(R.drawable.ic_favorite_appbar)
 
-            bottomAppBarButton.setOnClickListener {
-                Timber.i("Showing favorite users")
-                val direction = UsersFragmentDirections.actionUsersFragmentToFavoriteUsersFragment()
-                findNavController().navigate(direction)
+            if(favoriteUsersButton.isOrWillBeHidden) {
+                favoriteUsersButton.show()
+            }
+
+            favoriteUsersButton.setOnClickListener {
+                navigateToFavoriteUsers()
             }
         }
 
@@ -77,7 +76,14 @@ class UsersFragment : Fragment(), UserItemInteractions {
         })
     }
 
-    override fun showUserDetail(user: User, userImage: ImageView, position: Int) {
+    private fun navigateToFavoriteUsers() {
+        activity?.favorite_users_button?.isEnabled = false
+        Timber.i("Showing favorite users")
+        val direction = UsersFragmentDirections.actionUsersFragmentToFavoriteUsersFragment()
+        findNavController().navigate(direction)
+    }
+
+    override fun navigateToUserDetail(user: User, userImage: ImageView, position: Int) {
         Timber.i("Showing detail for user ${user.id}")
         val direction = UsersFragmentDirections.actionUsersFragmentToUserDetailFragment(user, position)
         val extras = FragmentNavigatorExtras(userImage to userImage.transitionName)
